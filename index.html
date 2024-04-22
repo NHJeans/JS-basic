@@ -1,0 +1,71 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>내배캠 최고 평점 영화 콜렉션</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet" />
+  <script>
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNzA5MTZmN2I0NzQyMGFhMjYzNWJlY2E2NjFjMjVkZiIsInN1YiI6IjY2MjYwOTAyNjNkOTM3MDE4Nzc0MGZiZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Lj5NbVCVHmBGRLI-iHDmhau9pA4XE04pa-SrqG3_Zlc'
+      }
+    };
+
+    fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+      .then(response => response.json())
+      // .then(response => console.log(response))
+      .then(data => {
+        const movies = data.results
+        movies.forEach(movie => {
+          const Id = movie.id;
+          const posterPath = movie.poster_path;
+          const title = movie.title;
+          const overview = movie.overview;
+          const voteAverage = movie.vote_average;
+
+          let temp_html = `
+          <div class="movie-card" id="${Id}" onclick="showMovieId('${Id}')" >
+            <img src="https://image.tmdb.org/t/p/w500/${posterPath}" alt="">
+            <h3 class="movie-title">
+            ${title}
+            </h3>
+          <div class="content-container">
+            <p>
+            ${overview}
+            </p>
+          </div>
+            <p class="moive-rate">
+            Rating: ${voteAverage}
+            </p>
+          </div>`;
+          document.querySelector('.card-list').innerHTML += temp_html;
+        });
+      })
+      .catch(err => console.error(err));
+
+    function showMovieId(Id) {
+      alert(`영화 ID: ${Id}`);
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>내배캠 최고 평점 영화 콜렉션</h1>
+  </header>
+  <form class="search">
+    <label>영화 검색 : </label>
+    <input type="text" id="search-input" placeholder="영화 제목을 검색해 보세요">
+    <button type="submit" id="search-btn">검색</button>
+  </form>
+  <section class="card-list">
+
+  </section>
+</body>
+
+</html> -->
