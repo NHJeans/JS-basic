@@ -16,7 +16,7 @@ let moviesData = [];
 
 const getMovies = async () => {
   try {
-    const response = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', options).json();
+    const response = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', options);
     const data = await response.json();
     // console.log(data.results)
     moviesData = data.results;
