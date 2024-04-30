@@ -98,10 +98,11 @@ const searchMovies = (movies) => {
   renderMovies(filteredMovies);
 }
 
-document.getElementById('search-btn').addEventListener('click', function (e) {
+document.getElementById('search-form').addEventListener('submit', function (e) {
   e.preventDefault();
   searchMovies(moviesData);
 });
+// 메인으로 돌아가는 버튼
 document.querySelector('header h1').addEventListener(
   'click', () => {
     window.location.reload();
