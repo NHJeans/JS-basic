@@ -122,7 +122,6 @@ section {
   background-color: #252525;
   color: white;
 }
-
 @media screen and (max-width: 992px) {
   .card-list {
     grid-template-columns: repeat(3, 1fr);
