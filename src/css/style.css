@@ -16,22 +16,25 @@ header {
   width: 100%;
   height: 100px;
   padding: 0 30px;
-  background-color: #c2c2af;
+  background-color: #000;
 }
 
 header h1 {
-  font-size: 40px;
-  color: #252525;
-  cursor: pointer;
+  font-size: 28px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 13px;
+  letter-spacing: 0px;
+  line-height: 34px;
 }
 
-header div {
+/*header div {
   width: 50px;
   height: 50px;
-  border: #252525 solid 2px;
+  border: #ffffff solid 2px;
   border-radius: 50%;
   cursor: pointer;
-}
+}*/
 
 .search {
   width: 100%;
@@ -41,8 +44,8 @@ header div {
   justify-content: center;
   align-items: center;
   padding: 20px 0;
-  background-color: #252525;
-  border-bottom: 1px solid black;
+  background-color: black;
+  border-bottom: 0.1px solid white;
 }
 
 .search label {
@@ -51,23 +54,36 @@ header div {
 }
 
 .search input {
-  margin-left: 20px;
+  margin-left: 5px;
   min-width: 200px;
   padding: 5px 10px;
   border: none;
-  border-radius: 10px;
+  border-radius: 14px;
+
 }
 
 .search button {
-  margin-left: 10px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+    margin-left: 5px;
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+    background: #f82f62;
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0px;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    line-height: 20px;
+    padding: 8px 16px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #f82f62;
+    border-radius: 24px;
 }
 
 section {
-  background-color: #f6f5e8;
+  background-color: #000;
 }
 
 .card-list {
@@ -86,7 +102,7 @@ section {
   padding: 20px;
   width: 300px;
   justify-self: center;
-  background-color: bisque;
+  background-color: white;
   border-radius: 10px;
   cursor: pointer;
   user-select: none;
@@ -122,6 +138,65 @@ section {
   background-color: #252525;
   color: white;
 }
+
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper {
+  width: 100%;
+  height: 300px;
+  margin: 20px auto;
+}
+
+.append-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.append-buttons button {
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #007aff;
+  color: #007aff;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin: 0 10px;
+  font-size: 13px;
+}
+
 @media screen and (max-width: 992px) {
   .card-list {
     grid-template-columns: repeat(3, 1fr);
