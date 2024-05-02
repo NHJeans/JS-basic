@@ -122,8 +122,6 @@ section {
   background-color: #252525;
   color: white;
 }
-<<<<<<< HEAD
-=======
 
 /* 상세페이지 */
 .sub_page {
@@ -323,9 +321,6 @@ section {
   color: #84868d;
 }
 
-
-
->>>>>>> 45b354a18e41d68ef91be5c38ce81c79a451fcd3
 @media screen and (max-width: 992px) {
   .card-list {
     grid-template-columns: repeat(3, 1fr);
