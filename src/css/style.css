@@ -122,10 +122,9 @@ section {
   background-color: #252525;
   color: white;
 }
-
 /* 상세페이지 */
 .sub_page {
-  padding: 20px 0 30px 40px;
+  padding: 40px 0 30px 40px;
   background-color: #000;
 }
 .sub_page .movie_info {
@@ -137,7 +136,7 @@ section {
 .sub_page .movie_info .text_wrap {
   width: 440px;
 }
-.sub_page .movie_info .tit {
+.sub_page .movie_info .title {
   font-size: 40px;
   font-weight: 700;
   color: #fff;
@@ -184,6 +183,7 @@ section {
   color: #fff;
   outline: none;
   border: none;
+  cursor: pointer;
 }
 .sub_page .movie_info .btn_box > button {
   font-size: 15px;
@@ -217,6 +217,7 @@ section {
   margin-top: 20px;
   background-color: #0C101B;
   border-radius: 8px;
+  cursor: pointer;
 }
 .sub_page .movie_cont .banner img {
   display: block;
@@ -226,12 +227,12 @@ section {
 }
 .sub_page .movie_cont .cont_info {
   margin-top: 70px;
-  max-width: 1280px;
+  max-width: 1020px;
 }
 .sub_page .movie_cont .cont_item {
   margin-top: 40px;
 }
-.sub_page .movie_cont .tit {
+.sub_page .movie_cont .title {
   margin-bottom: 10px;
   font-size: 20px;
   font-weight: 700;
@@ -257,12 +258,12 @@ section {
   object-fit: cover;
   border-radius: 4px;
 }
-.sub_page .movie_cont .tit_area {
+.sub_page .movie_cont .title_area {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.sub_page .movie_cont .tit_area .btn_more {
+.sub_page .movie_cont .title_area .btn_more {
   font-size: 15px;
   color: #84868d;
   text-decoration: none;
@@ -320,9 +321,6 @@ section {
   margin-top: 10px;
   color: #84868d;
 }
-
-
-
 @media screen and (max-width: 992px) {
   .card-list {
     grid-template-columns: repeat(3, 1fr);
