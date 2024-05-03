@@ -1,4 +1,3 @@
-
 // 리뷰 작성
 const getElementValue = (id) => document.getElementById(id).value;
 const reviewKey = 'review_'
@@ -58,7 +57,7 @@ const renderReviews = () => {
 
 /**
  * @description 리뷰 데이터를 받아 리뷰를 나타내는 HTML 요소를 생성, 로컬스토리지에서 고유값 uuid를 찾아 리뷰를 삭제할 수 있는 버튼을 추가
- * 
+ *
  * @param {Object} review 리뷰 데이터 객체, 'uuid', 'author', 'content' 속성을 포함해야 함
  * @returns {HTMLElement} 리뷰를 나타내는 HTML 요소를 반환.
  */

@@ -1,21 +1,11 @@
-const API_KEY =
-  'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNzA5MTZmN2I0NzQyMGFhMjYzNWJlY2E2NjFjMjVkZiIsInN1YiI6IjY2MjYwOTAyNjNkOTM3MDE4Nzc0MGZiZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Lj5NbVCVHmBGRLI-iHDmhau9pA4XE04pa-SrqG3_Zlc';
-const BASE_URL = 'https://api.themoviedb.org/3';
-const IMAGE_URL = 'https://image.tmdb.org/t/p/w500/';
-
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: `Bearer ${API_KEY}`,
-  },
-};
-
 let moviesData = [];
 
 const getMovies = async () => {
   try {
-    const response = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', options);
+    let fetchUtils = new FetchUtils();
+    const response = await fetchUtils.get(`${BASE_URL_KEY}${MOVIES_PATH}`, (method) =>
+        fetchUtils.setupOptions(method, fetchUtils.APPLICATION_JSON, API_KEY)
+    );
     const data = await response.json();
     // console.log(data.results)
     moviesData = data.results;
@@ -35,7 +25,7 @@ const createMovieCard = (moviesData) => {
 
   //? 영화 포스터 이미지
   const img = document.createElement('img');
-  img.src = `${IMAGE_URL}${poster_path}`;
+  img.src = `${IMAGE_BASE_URL}${IMAGE_PATH}${poster_path}`;
   img.alt = `${title} poster`;
   img.classList.add('movie-poster');
 
