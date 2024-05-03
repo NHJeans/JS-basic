@@ -1,14 +1,12 @@
-
 const modalElement = document.getElementById('reviewModalContainer');
 
 const showModal = () => {
   modalElement.style.display = 'block';
 };
 
-
 const hideModal = () => {
   modalElement.style.display = 'none';
-}
+};
 
 const handleClickOutside = (e) => {
   if (e.target === modalElement) {

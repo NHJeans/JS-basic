@@ -54,14 +54,14 @@ const createMovieCard = (moviesData) => {
 
   //? 평점
   const movieRating = document.createElement('span');
-  movieRating.textContent = `Rating: ${vote_average}`;
+  movieRating.textContent = `평점: ${vote_average}`;
   movieRating.classList.add('movie-rating');
 
   movieCard.appendChild(img);
   movieCard.appendChild(contentContainer);
 
   contentContainer.appendChild(movieTitle);
-  contentContainer.appendChild(movieOverview);
+  // contentContainer.appendChild(movieOverview);
   contentContainer.appendChild(movieRating);
 
   movieCard.addEventListener('click', showMovieId);
@@ -98,10 +98,13 @@ document.getElementById('search-form').addEventListener('submit', function (e) {
   e.preventDefault();
   searchMovies(moviesData);
 });
+
 // 메인으로 돌아가는 버튼
 document.querySelector('header h1').addEventListener('click', () => {
   window.location.reload();
 });
+
+// 최상단으로 가는 버튼
 document.querySelector('.up-btn').addEventListener('click', () => {
   window.scrollTo({
     top: 0,
@@ -118,6 +121,7 @@ resetBtn.addEventListener('click', () => {
   inputValue.value = '';
 });
 
+getMovies();
 const swiperOption = {
   slidesPerView: 6,
   loop: true,
@@ -132,8 +136,6 @@ const swiperOption = {
     prevEl: '.swiper-button-prev',
   },
 };
-
-getMovies();
 
 const mainSwiper = new Swiper('.mySwiper', swiperOption);
 const subSwiper = new Swiper('.subSwiper', swiperOption);
