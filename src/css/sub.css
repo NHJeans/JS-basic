@@ -10,7 +10,7 @@
   border-bottom: 1px solid #1b1c1d;
 }
 .sub_page .movie_info .text_wrap {
-  width: 440px;
+  width: 1000px;
 }
 .sub_page .movie_info .title {
   font-size: 40px;
@@ -127,12 +127,27 @@
   width: 330px;
   height: 180px;
 }
-.sub_page .movie_cont .video_list img {
+.sub_page .movie_cont .video_list .img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 4px;
 }
+
+.image-container {
+  position: relative;
+}
+
+.image-play {
+  width: 100px; /* 이미지의 너비를 조정할 수 있어요. */
+  height: 100px; /* 높이를 자동으로 조정하여 이미지 비율을 유지합니다. */
+  position: absolute;
+  top: 25%;
+  left: 30%;
+  z-index: 1; /* 위에 위치할 이미지는 z-index를 조절해서 다른 이미지 위에 표시되도록 설정할 수 있어요. */
+  opacity: 0.8;
+}
+
 .sub_page .movie_cont .title_area {
   display: flex;
   justify-content: space-between;
@@ -200,181 +215,193 @@
   color: white;
 }
 
+.movie_image_form {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end; /* 이미지를 오른쪽 끝으로 이동시킵니다. */
+}
+
+.movie_image_form img {
+	max-width: 100%; /* 이미지의 최대 너비를 설정합니다. */
+	height: auto; /* 이미지의 높이를 자동으로 조정합니다. */
+	mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
 /* review */
 .show {
-  display: block;
+	display: block;
 }
 .review_title_cont {
-  position: relative;
+	position: relative;
 }
 .review-title {
-  margin-bottom: 10px;
-  font-size: 20px;
-  font-weight: 700;
-  color: #fff;
+	margin-bottom: 10px;
+	font-size: 20px;
+	font-weight: 700;
+	color: #fff;
 }
 .review_btn {
-  position: absolute;
-  right: 15px;
-  top: -4px;
-  border: none;
-  border-radius: 4px;
-  background-color: #f82f62;
-  padding: 10px 30px;
-  font-size: 15px;
-  color: #fff;
+	position: absolute;
+	right: 15px;
+	top: -4px;
+	border: none;
+	border-radius: 4px;
+	background-color: #f82f62;
+	padding: 10px 30px;
+	font-size: 15px;
+	color: #fff;
 }
 .black-bg {
-  display: none;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
-  padding: 30px;
+	display: none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.7);
+	z-index: 1000;
+	padding: 30px;
 }
 
 .white-bg {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 30vw;
-  height: 60vh;
-  margin: auto;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 30vw;
+	height: 60vh;
+	margin: auto;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: white;
+	padding: 20px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
 }
 .white-bg form {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 .white-bg form label {
-  font-size: 15px;
-  font-weight: 700;
-  color: #1b1c1d;
+	font-size: 15px;
+	font-weight: 700;
+	color: #1b1c1d;
 }
 .white-bg form label,
 input {
-  padding-top: 5px;
-  margin: 5px 0;
+	padding-top: 5px;
+	margin: 5px 0;
 }
 .white-bg form input {
-  padding: 5px 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+	padding: 5px 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
 }
 .white-bg form textarea {
-  height: 30vh;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: none;
+	height: 30vh;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: none;
 }
 #saveBtn,
 #cancelBtn {
-  margin-top: 10px;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+	margin-top: 10px;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
 }
 #saveBtn {
-  background-color: #f82f62;
-  color: white;
-  font-size: 15px;
+	background-color: #f82f62;
+	color: white;
+	font-size: 15px;
 }
 .white-bg h2 {
-  font-size: 20px;
-  font-weight: 700;
+	font-size: 20px;
+	font-weight: 700;
 }
 
 .white-bg h2,
 label {
-  color: #000;
+	color: #000;
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  color: black;
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	color: black;
 }
 
 .review-list {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  height: 10vh;
-  overflow: auto;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	height: 10vh;
+	overflow: auto;
 }
 .review-author {
-  color: rgb(255, 255, 255);
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: 20px;
-  margin-bottom: 5px;
+	color: rgb(255, 255, 255);
+	font-size: 15px;
+	font-weight: 400;
+	letter-spacing: 0px;
+	line-height: 20px;
+	margin-bottom: 5px;
 }
 
 .review-content {
-  width: 40vw;
-  color: rgb(132, 134, 141);
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: 20px;
-  margin: 4px 0px;
+	width: 40vw;
+	color: rgb(132, 134, 141);
+	font-size: 15px;
+	font-weight: 400;
+	letter-spacing: 0px;
+	line-height: 20px;
+	margin: 4px 0px;
 }
 
 .review-edit-btn,
 .review-delete-btn {
-  cursor: pointer;
-  background-size: 14px 14px;
-  background-repeat: no-repeat;
-  background-position: left center;
-  padding-left: 24px;
-  border: none;
-  background-color: transparent;
-  height: 20px;
-  line-height: 20px;
-  color: rgb(255, 255, 255);
-  filter: brightness(0) invert(1);
+	cursor: pointer;
+	background-size: 14px 14px;
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 24px;
+	border: none;
+	background-color: transparent;
+	height: 20px;
+	line-height: 20px;
+	color: rgb(255, 255, 255);
+	filter: brightness(0) invert(1);
 }
 
 .review-edit-btn {
-  background-image: url('../asset/pencil-fill.svg');
+	background-image: url('../asset/pencil-fill.svg');
 }
 
 .review-delete-btn {
-  background-image: url('../asset/trash-fill.svg');
+	background-image: url('../asset/trash-fill.svg');
 }
 
 .review-button-div {
-  margin-top: 40px;
+	margin-top: 40px;
 }
 
 .review-content-cont {
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
 .review-list input {
-  width: 100px;
-  height: 20px;
-  margin-top: 40px;
+	width: 100px;
+	height: 20px;
+	margin-top: 40px;
 }
 
 .confirm-btn {
-  width: 70px;
-  height: 30px;
-  margin-top: 40px;
+	width: 70px;
+	height: 30px;
+	margin-top: 40px;
 }
