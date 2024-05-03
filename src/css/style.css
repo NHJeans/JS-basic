@@ -6,6 +6,13 @@
 body {
   font-family: 'Roboto', sans-serif;
   letter-spacing: -0.02em;
+  position: relative;
+  height: 100%;
+  background: white;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
 }
 
 header {
@@ -129,73 +136,68 @@ section {
 
 .up-btn {
   position: fixed;
-  bottom: 20px;
+  bottom: 25px;
   right: 20px;
   border: none;
-  padding: 15px 18px;
   border-radius: 50%;
   cursor: pointer;
-  background-color: #252525;
+  background-color: #f82f62;
   color: white;
 }
 
-body {
-  position: relative;
-  height: 100%;
-}
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content !important;
+    }
 
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
+    .swiper-slide img {
+      display: block;
+      width: 600px;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 30px;
+    }
 
-.swiper {
-  width: 100%;
-  height: 100%;
-}
+    .swiper {
+      width: 100%;
+      height: 300px;
+      margin: 20px auto;
+    }
 
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .append-buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
 
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+    .append-buttons button {
+      display: inline-block;
+      cursor: pointer;
+      border: 1px solid #007aff;
+      color: #007aff;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin: 0 10px;
+      font-size: 13px;
+    }
 
-.swiper {
-  width: 100%;
-  height: 300px;
-  margin: 20px auto;
-}
+    .swiper-slide img.sub {
+      display: block;
+      width: 300px;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 30px;
+    }
 
-.append-buttons {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.append-buttons button {
-  display: inline-block;
-  cursor: pointer;
-  border: 1px solid #007aff;
-  color: #007aff;
-  text-decoration: none;
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin: 0 10px;
-  font-size: 13px;
-}
+    .divider{
+      padding: 20px 0 20px 0;
+      background-color: #000;
+    }
 
 @media screen and (max-width: 992px) {
   .card-list {

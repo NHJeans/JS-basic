@@ -116,19 +116,24 @@ document.querySelector('.up-btn').addEventListener('click', () => {
 
 getMovies();
 
-    var swiper = new Swiper(".mySwiper", {
-      slidesPerView: 4,
-      centeredSlides: true,
-      spaceBetween: 30,
-      pagination: {
-        el: ".swiper-pagination",
-        type: "fraction",
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
+const swiperOption = {
+  slidesPerView: 6,
+  loop: true,
+  centeredSlides: true,
+  spaceBetween: 15,
+  pagination: {
+    el: ".swiper-pagination",
+    type: "fraction",
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+}
+
+const mainSwiper = new Swiper(".mySwiper", swiperOption);
+const subSwiper = new Swiper(".subSwiper", swiperOption);
+
     
 
 
