@@ -114,7 +114,14 @@ document.querySelector('.up-btn').addEventListener('click', () => {
   });
 });
 
-getMovies();
+// 검색창 초기화 버튼
+const resetBtn = document.querySelector('#reset-btn');
+const inputValue = document.querySelector('#search-input');
+resetBtn.addEventListener('click', () => {
+  getMovies();
+  console.log(inputValue.value);
+  inputValue.value = '';
+});
 
 const swiperOption = {
   slidesPerView: 6,
