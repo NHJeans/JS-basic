@@ -1,33 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <title>내배캠 최고 평점 영화 콜렉션</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/style.css">
-  <title>내배캠 최고 평점 영화 콜렉션</title>
+  <body>
+    <a href="../src/html/sub.html?movieId=215">임시 상세페이지 이동</a>
+    <header>
+      <h1>최고 평점 영화 콜렉션</h1>
+      <div></div>
+    </header>
+    <form class="search" id="search-form">
+      <label></label>
+      <input type="text" id="search-input" placeholder="영화 제목을 검색해 보세요" />
+      <button type="submit" id="search-btn">검색</button>
+    </form>
+    <!-- Swiper -->
 
-</head>
+    <div #swiperRef="" class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+        <div class="swiper-slide">Slide 4</div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
 
-<body>
-  <header>
-    <h1>최고 평점 영화 콜렉션</h1>
-    <div>미구현</div>
-  </header>
-  <form class="search" id="search-form">
-    <label></label>
-    <input type="text" id="search-input" placeholder="영화 제목을 검색해 보세요">
-    <button type="submit" id="search-btn">검색</button>
-  </form>
-  <section class="card-list">
-  </section>
-  <div id="up-btn">
-    <button class="up-btn">⬆️</button>
-  </div>
-</body>
-
-<script type="module" src="./js/index.js"></script>
-
+    <section class="card-list"></section>
+    <div id="up-btn">
+      <button class="up-btn">⬆️</button>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./js/constants/movieConstants.js"></script>
+  <script src="./js/utils/fetchUtils.js"></script>
+  <script type="module" src="./js/index.js"></script>
 </html>

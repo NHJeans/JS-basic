@@ -1,199 +1,311 @@
 /* 상세페이지 */
 .sub_page {
-	padding: 20px 0 30px 40px;
-	background-color: #000;
-  }
-  .sub_page .movie_info {
+  padding: 20px 0 30px 40px;
+  background-color: #000;
+}
+.sub_page .movie_info {
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #1b1c1d;
+}
+.sub_page .movie_info .text_wrap {
+  width: 1000px;
+}
+.sub_page .movie_info .title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #fff;
+}
+.sub_page .movie_info .info_list {
+  display: flex;
+  margin-top: 25px;
+  padding-bottom: 20px;
+}
+.sub_page .movie_info .info_list > li {
+  position: relative;
+  margin-right: 10px;
+  font-size: 15px;
+  color: #babac1;
+}
+.sub_page .movie_info .info_list > li:not(:first-child) {
+  padding-left: 10px;
+  margin-right: 10px;
+}
+.sub_page .movie_info .info_list > li:not(:first-child)::before {
+  content: '';
+  width: 2px;
+  height: 2px;
+  background-color: #babac1;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.sub_page .movie_info .desc {
+  margin-top: 10px;
+  font-size: 15px;
+  color: #84868d;
+  letter-spacing: 0px;
+  line-height: 22px;
+}
+.sub_page .movie_info .btn_box {
+  margin-top: 20px;
+}
+.sub_page .movie_info .btn_box button {
+  font-size: 15px;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.sub_page .movie_info .btn_box > button {
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #000;
+}
+.sub_page .movie_info .btn_box > .btn_two {
+  margin-top: 30px;
+}
+.sub_page .movie_info .btn_box .btn_pink {
+  border-radius: 4px;
+  background-color: #f82f62;
+  padding: 10px 30px;
+}
+.sub_page .movie_info .btn_box button:not(:first-child) {
+  margin-left: 10px;
+}
+.sub_page .movie_cont {
+  padding: 30px 0;
+}
+.sub_page .movie_cont .event_list > li {
+  font-size: 15px;
+  color: #babac1;
+}
+.sub_page .movie_cont .event_list > li:not(:first-child) {
+  margin-top: 10px;
+}
+.sub_page .movie_cont .banner {
+  width: 100%;
+  height: 80px;
+  margin-top: 20px;
+  background-color: #0c101b;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.sub_page .movie_cont .banner img {
+  display: block;
+  width: 700px;
+  height: 100%;
+  margin: 0 auto;
+}
+.sub_page .movie_cont .cont_info {
+  margin-top: 70px;
+  max-width: 1020px;
+}
+.sub_page .movie_cont .cont_item {
+  margin-top: 40px;
+}
+.sub_page .movie_cont .title {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+.sub_page .movie_cont .video_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.sub_page .movie_cont .video_list li {
+  width: 330px;
+  height: 180px;
+}
+.sub_page .movie_cont .video_list a {
+  display: block;
+  width: 330px;
+  height: 180px;
+}
+.sub_page .movie_cont .video_list .img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-play {
+  width: 100px; /* 이미지의 너비를 조정할 수 있어요. */
+  height: 100px; /* 높이를 자동으로 조정하여 이미지 비율을 유지합니다. */
+  position: absolute;
+  top: 25%;
+  left: 30%;
+  z-index: 1; /* 위에 위치할 이미지는 z-index를 조절해서 다른 이미지 위에 표시되도록 설정할 수 있어요. */
+  opacity: 0.8;
+}
+
+.sub_page .movie_cont .title_area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sub_page .movie_cont .title_area .btn_more {
+  font-size: 15px;
+  color: #84868d;
+  text-decoration: none;
+}
+.sub_page .movie_cont .char_list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.sub_page .movie_cont .char_list > li {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin-top: 20px;
+}
+.sub_page .movie_cont .char_list > li img {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+}
+.sub_page .movie_cont .char_list .txt_area {
+  margin-left: 10px;
+}
+.sub_page .movie_cont .char_list .txt_area strong {
+  font-size: 15px;
+  color: #fff;
+}
+.sub_page .movie_cont .char_list .txt_area p {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #84868d;
+}
+.sub_page .movie_cont .review_list > li {
+  display: flex;
+  margin-top: 20px;
+}
+.sub_page .movie_cont .review_list .img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+.sub_page .movie_cont .review_list .txt_area {
+  margin-left: 10px;
+}
+.sub_page .movie_cont .review_list .txt_area strong {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}
+.sub_page .movie_cont .review_list .txt_area span {
+  width: 10px;
+  height: 10px;
+}
+.sub_page .movie_cont .review_list .txt_area p {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #84868d;
+}
+.cont_item {
+  color: white;
+}
+
+.movie_image_form {
 	width: 100%;
-	margin: 0 auto;
-	padding-bottom: 20px;
-	border-bottom: 1px solid #1b1c1d;
-  }
-  .sub_page .movie_info .text_wrap {
-	width: 440px;
-  }
-  .sub_page .movie_info .title {
-	font-size: 40px;
-	font-weight: 700;
-	color: #fff;
-  }
-  .sub_page .movie_info .info_list {
 	display: flex;
-	margin-top: 25px;
-	padding-bottom: 20px;
-  }
-  .sub_page .movie_info .info_list > li {
-	position: relative;
-	margin-right: 10px;
-	font-size: 15px;
-	color: #babac1;
-  }
-  .sub_page .movie_info .info_list > li:not(:first-child) {
-	padding-left: 10px;
-	margin-right: 10px;
-  }
-  .sub_page .movie_info .info_list > li:not(:first-child)::before {
-	content: '';
-	width: 2px;
-	height: 2px;
-	background-color: #babac1;
-	border-radius: 50%;
-	position: absolute;
-	top: 50%;
-	left: 0;
-	transform: translateY(-50%);
-  
-  }
-  .sub_page .movie_info .desc {
-	margin-top: 10px;
-	font-size: 15px;
-	color: #84868d;
-	letter-spacing: 0px;
-	line-height: 22px;
-  }
-  .sub_page .movie_info .btn_box {
-	margin-top: 20px;
-  }
-  .sub_page .movie_info .btn_box button {
-	font-size: 15px;
-	color: #fff;
-	outline: none;
-	border: none;
-	cursor: pointer;
-  }
-  .sub_page .movie_info .btn_box > button {
-	font-size: 15px;
-	font-weight: 500;
-	background-color: #000;
-  }
-  .sub_page .movie_info .btn_box > .btn_two {
-	margin-top: 30px;
-  }
-  .sub_page .movie_info .btn_box .btn_pink {
-	border-radius: 4px;
-	background-color: #f82f62;
-	padding: 10px 30px;
-  }
-  .sub_page .movie_info .btn_box button:not(:first-child) {
-	margin-left: 10px;
-  }
-  .sub_page .movie_cont {
-	padding: 30px 0;
-  }
-  .sub_page .movie_cont .event_list > li {
-	font-size: 15px;
-	color: #babac1;
-  }
-  .sub_page .movie_cont .event_list > li:not(:first-child) {
-	margin-top: 10px;
-  }
-  .sub_page .movie_cont .banner {
-	width: 100%;
-	height: 80px;
-	margin-top: 20px;
-	background-color: #0C101B;
-	border-radius: 8px;
-	cursor: pointer;
-  }
-  .sub_page .movie_cont .banner img {
-	display: block;
-	width: 700px;
-	height: 100%;
-	margin: 0 auto;
-  }
-  .sub_page .movie_cont .cont_info {
-	margin-top: 70px;
-	max-width: 1020px;
-  }
-  .sub_page .movie_cont .cont_item {
-	margin-top: 40px;
-  }
-  .sub_page .movie_cont .title {
-	margin-bottom: 10px;
-	font-size: 20px;
-	font-weight: 700;
-	color: #fff;
-  }
-  .sub_page .movie_cont .video_list {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 15px;
-  }
-  .sub_page .movie_cont .video_list li {
-	width: 330px;
-	height: 180px;
-  }
-  .sub_page .movie_cont .video_list a {
-	display: block;
-	width: 330px;
-	height: 180px;
-  }
-  .sub_page .movie_cont .video_list img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	border-radius: 4px;
-  }
-  .sub_page .movie_cont .title_area {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-  }
-  .sub_page .movie_cont .title_area .btn_more {
-	font-size: 15px;
-	color: #84868d;
-	text-decoration: none;
-  }
-  .sub_page .movie_cont .char_list {
-	display: flex;
-	flex-wrap: wrap;
-  }
-  .sub_page .movie_cont .char_list > li {
-	display: flex;
-	align-items: center;
-	width: 50%;
-	margin-top: 20px;
-  }
-  .sub_page .movie_cont .char_list > li img {
-	width: 62px;
-	height: 62px;
-	border-radius: 50%;
-  }
-  .sub_page .movie_cont .char_list .txt_area {
-	margin-left: 10px;
-  }
-  .sub_page .movie_cont .char_list .txt_area strong {
-	font-size: 15px;
-	color: #fff;
-  }
-  .sub_page .movie_cont .char_list .txt_area p {
-	margin-top: 10px;
-	font-size: 13px;
-	color: #84868d;
-  }
-  .sub_page .movie_cont .review_list > li {
-	display: flex;
-	margin-top: 20px;
-  }
-  .sub_page .movie_cont .review_list .img {
-	width: 38px;
-	height: 38px;
-	border-radius: 50%;
-  }
-  .sub_page .movie_cont .review_list .txt_area {
-	margin-left: 10px;
-  }
-  .sub_page .movie_cont .review_list .txt_area strong {
-	color: #fff;
-	font-size: 15px;
-	font-weight: 500;
-  }
-  .sub_page .movie_cont .review_list .txt_area span {
-	width: 10px;
-	height: 10px;
-  }
-  .sub_page .movie_cont .review_list .txt_area p {
-	font-size: 14px;
-	margin-top: 10px;
-	color: #84868d;
-  }
+	justify-content: flex-end; /* 이미지를 오른쪽 끝으로 이동시킵니다. */
+}
+
+.movie_image_form img {
+	max-width: 100%; /* 이미지의 최대 너비를 설정합니다. */
+	height: auto; /* 이미지의 높이를 자동으로 조정합니다. */
+	mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+/* review */
+.show {
+  display: block;
+}
+.review-title {
+  position: relative;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+.review_btn {
+  position: absolute;
+  left: 900px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f82f62;
+  padding: 10px 30px;
+  font-size: 15px;
+  color: #fff;
+}
+.black-bg {
+  display: none; /* 초기 상태에서는 보이지 않도록 설정 */
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7); /* 검은색 반투명 배경 */
+  z-index: 1000; /* 화면의 다른 요소들보다 위에 위치하도록 z-index 설정 */
+  padding: 30px;
+}
+
+.white-bg {
+  position: relative; /* 부모 요소인 .black-bg 내에서 정렬 */
+  width: 30vw;
+  height: 60vh;
+  margin: auto; /* 중앙 정렬 */
+  top: 50%; /* 상위 요소의 중간 위치 */
+  transform: translateY(-50%); /* Y축 기준 중앙 정렬 */
+  background-color: white; /* 흰색 배경 */
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+
+.modal h2 {
+  text-align: center;
+  margin: 10px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  color: black;
+}
+
+.review-list {
+  padding: 10px;
+  height: 10vh;
+  overflow: auto;
+}
+.review-author {
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 20px;
+  margin-bottom: 5px;
+}
+
+.review-content {
+  color: rgb(132, 134, 141);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 20px;
+  white-space: pre-wrap;
+  margin: 4px 0px;
+}
