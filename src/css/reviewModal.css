@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.show {
+  display: block;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 35%;
+  top: 25%;
+  width: 30vw;
+  height: 60vh;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4); /* 백그라운드 색상 투명도 */
+}
+
+.modal h2 {
+  text-align: center;
+  margin: 10px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.review-list {
+  padding: 10px;
+  border: 1px solid #888;
+  height: 10vh;
+  overflow: auto;
+}
