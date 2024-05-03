@@ -2,44 +2,59 @@
 const getElementValue = (id) => document.getElementById(id).value;
 const reviewKey = 'review_'
 
-document.getElementById('saveBtn').addEventListener('click', () => {
+document.getElementById('saveBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+
   const author = getElementValue('author');
   console.log(author);
   const content = getElementValue('content');
   const password = getElementValue('password');
   const uuid = crypto.randomUUID();
+  const movieId = new URLSearchParams(window.location.search).get('movieId'); // movieId 추출
+
   const reviewData = {
     author,
     content,
     password,
-    uuid
+    uuid,
+    movieId // movieId 추가
   };
   if (author === '' || content === '' || password === '') {
     alert('모든 항목을 입력해주세요');
     return;
   }
   // 로컬 스토리지에 저장
-  localStorage.setItem(`review_${uuid}`, JSON.stringify(reviewData));
-  alert('리뷰가 저장되었습니다.');
-
+  try {
+    localStorage.setItem(`${reviewKey}${uuid}`, JSON.stringify(reviewData));
+    alert('리뷰가 저장되었습니다.');
+    // 리다이렉션
+    redirectToDetailPage(movieId);
+  } catch (e) {
+    console.error('리뷰 저장 오류:', e);
+    alert('리뷰 저장 중 오류가 발생했습니다.');
+  }
 });
-
+const redirectToDetailPage = (movieId) => {
+  window.location.href = `sub.html?movieId=${movieId}`
+};
 /**
  * @returns {Array} Array of review objects.
  * @description 로컬 스토지에 저장된 데이터를 순회하며 'review_'로 시작하는 키를 가진 데이터를 찾아 배열에 추가
  */
 const getReviewData = () => {
+  const currentMovieId = new URLSearchParams(window.location.search).get('movieId');
   const reviewData = new Array();
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     if (key.includes('review_')) {
       const data = JSON.parse(localStorage.getItem(key));
-      reviewData.push(data);
+      if (data.movieId === currentMovieId) { // 현재 페이지의 movieId와 일치하는 데이터만 추가
+        reviewData.push(data);
+      }
     }
   }
   return reviewData;
 }
-
 /**
  * @description 리뷰 데이터를 가져와서 리뷰를 렌더링
  */
@@ -55,6 +70,7 @@ const renderReviews = () => {
   })
 };
 
+
 /**
  * @description 리뷰 데이터를 받아 리뷰를 나타내는 HTML 요소를 생성, 로컬스토리지에서 고유값 uuid를 찾아 리뷰를 삭제할 수 있는 버튼을 추가
  *
@@ -66,8 +82,9 @@ const createElementReview = (review) => {
   reviewElement.classList.add('review-list');
   reviewElement.id = `${reviewKey}${review.uuid}`;
 
-  const detailsElement = document.createElement('div'); // 새로운 div를 생성합니다.
-  detailsElement.classList.add('review-content-cont'); // 클래스를 추가합니다.
+  const detailsElement = document.createElement('div');
+  detailsElement.classList.add('review-content-cont');
+
 
   const authorElement = document.createElement('p');
   authorElement.textContent = review.author;
@@ -77,13 +94,14 @@ const createElementReview = (review) => {
   contentElement.textContent = review.content;
   contentElement.classList.add('review-content');
 
-  // detailsElement div에 authorElement와 contentElement를 추가합니다.
+
   detailsElement.appendChild(authorElement);
   detailsElement.appendChild(contentElement);
-
-  // reviewElement div에 detailsElement를 추가합니다.
   reviewElement.appendChild(detailsElement);
 
+  // if (review.author === getElementValue('author')) {
+  //   appendControlButtons(reviewElement, review.uuid);
+  // }
   if (localStorage.getItem(`${reviewKey}${review.uuid}`)) {
     appendControlButtons(reviewElement, review.uuid);
   }
