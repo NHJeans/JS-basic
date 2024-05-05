@@ -1,3 +1,5 @@
+import { validateBlank, validatePassword } from "../utils/validation.js";
+
 // 리뷰 작성
 const getElementValue = (id) => document.getElementById(id).value;
 const reviewKey = 'review_'
@@ -10,20 +12,28 @@ document.getElementById('saveBtn').addEventListener('click', (e) => {
   const content = getElementValue('content');
   const password = getElementValue('password');
   const uuid = crypto.randomUUID();
-  const movieId = new URLSearchParams(window.location.search).get('movieId'); // movieId 추출
+  const movieId = new URLSearchParams(window.location.search).get('movieId');
+
+  if (validateBlank(author).res === false) {
+    alert(validateBlank(author).message);
+    return;
+  }
+  if (validateBlank(content).res === false) {
+    alert(validateBlank(content).message);
+    return;
+  }
+  if (validatePassword(password).res === false) {
+    alert(validatePassword(password).message);
+    return;
+  }
 
   const reviewData = {
     author,
     content,
     password,
     uuid,
-    movieId // movieId 추가
+    movieId
   };
-  if (author === '' || content === '' || password === '') {
-    alert('모든 항목을 입력해주세요');
-    return;
-  }
-  // 로컬 스토리지에 저장
   try {
     localStorage.setItem(`${reviewKey}${uuid}`, JSON.stringify(reviewData));
     alert('리뷰가 저장되었습니다.');
@@ -147,7 +157,7 @@ const inputPassword = (uuid, onSuccess) => {
     const reviewElement = document.getElementById(`${reviewKey}${uuid}`);
     passwordInput = document.createElement('input');
     passwordInput.type = 'password';
-    passwordInput.placeholder = '패스워드 입력';
+    passwordInput.placeholder = '패스워드를 입력';
     passwordInput.id = `password_${uuid}`;
     reviewElement.appendChild(passwordInput);
 
@@ -171,7 +181,6 @@ const verifyPassword = (uuid, passwordInput, onSuccess) => {
   if (inputPassword === review.password) {
     onSuccess(uuid, review);
     passwordInput.remove();
-    passwordInput.nextSibling.remove();
   } else {
     alert('패스워드가 일치하지 않습니다.');
   }
@@ -203,13 +212,21 @@ const handleEdit = (uuid, review) => {
 
   const updateButton = document.createElement('button');
   updateButton.textContent = '업데이트';
-  updateButton.onclick = () => {
+  updateButton.addEventListener('click', () => {
+    if (validateBlank(authorInput.value).res === false) {
+      alert('작성자 이름을 입력해주세요.');
+      return;
+    }
+    if (validateBlank(contentInput.value).res === false) {
+      alert('리뷰 내용을 입력해주세요.');
+      return;
+    }
     review.author = authorInput.value;
     review.content = contentInput.value;
     localStorage.setItem(`${reviewKey}${uuid}`, JSON.stringify(review));
     alert('리뷰가 업데이트되었습니다.');
     renderReviews();
-  };
+  });
 
   reviewElement.appendChild(authorInput);
   reviewElement.appendChild(contentInput);
