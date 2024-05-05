@@ -156,6 +156,7 @@ const inputPassword = (uuid, onSuccess) => {
   if (!passwordInput) {
     const reviewElement = document.getElementById(`${reviewKey}${uuid}`);
     passwordInput = document.createElement('input');
+    passwordInput.classList.add('password-input');
     passwordInput.type = 'password';
     passwordInput.placeholder = '패스워드를 입력';
     passwordInput.id = `password_${uuid}`;
@@ -205,12 +206,18 @@ const handleDelete = (uuid) => {
 const handleEdit = (uuid, review) => {
   const reviewElement = document.getElementById(`${reviewKey}${uuid}`);
   reviewElement.innerHTML = '';
-  const authorInput = document.createElement('input');
-  authorInput.value = review.author;
-  const contentInput = document.createElement('textarea');
-  contentInput.value = review.content;
+  const editContainer = document.createElement('div');
+  editContainer.classList.add('edit-container');
 
+  const authorInput = document.createElement('input');
+  const contentInput = document.createElement('textarea');
   const updateButton = document.createElement('button');
+  authorInput.classList.add('edit-author');
+  contentInput.classList.add('edit-content');
+  updateButton.classList.add('edit-update-btn');
+
+  authorInput.value = review.author;
+  contentInput.value = review.content;
   updateButton.textContent = '업데이트';
   updateButton.addEventListener('click', () => {
     if (validateBlank(authorInput.value).res === false) {
@@ -228,9 +235,11 @@ const handleEdit = (uuid, review) => {
     renderReviews();
   });
 
-  reviewElement.appendChild(authorInput);
-  reviewElement.appendChild(contentInput);
-  reviewElement.appendChild(updateButton);
+  editContainer.appendChild(authorInput);
+  editContainer.appendChild(contentInput);
+  editContainer.appendChild(updateButton);
+
+  reviewElement.appendChild(editContainer);
 };
 
 renderReviews();

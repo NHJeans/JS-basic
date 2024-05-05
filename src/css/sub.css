@@ -355,7 +355,7 @@ label {
 }
 
 .review-content {
-  width: 40vw;
+  width: 30vw;
   color: rgb(132, 134, 141);
   font-size: 15px;
   font-weight: 400;
@@ -387,23 +387,58 @@ label {
   background-image: url('../asset/trash-fill.svg');
 }
 
-.review-button-div {
-  margin-top: 40px;
+.review-button-div,
+.password-input,
+.confirm-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
 }
 
 .review-content-cont {
   margin-top: 20px;
 }
 
-.review-list input {
-  width: 100px;
-  height: 20px;
-  margin-top: 40px;
+.review-list .password-input {
+  width: 200px;
+  height: 6px;
+  margin-top: 35px;
 }
 
 .confirm-btn {
-  width: 70px;
+  width: 7vw;
   height: 30px;
-  margin-top: 40px;
+  text-align: center;
+  margin-top: 35px;
   cursor: pointer;
+}
+
+.edit-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.edit-author,
+.edit-content,
+.edit-update-btn {
+  margin-left: 10px;
+}
+
+.edit-author {
+  padding: 9px;
+}
+.edit-content {
+  resize: none;
+}
+
+.edit-update-btn {
+  cursor: pointer;
+  padding: 9px;
 }
