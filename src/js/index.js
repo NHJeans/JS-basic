@@ -54,7 +54,7 @@ const createMovieCard = (moviesData) => {
   // contentContainer.appendChild(movieOverview);
   contentContainer.appendChild(movieRating);
 
-  movieCard.addEventListener('click', showMovieId);
+  movieCard.addEventListener('click', moveSub);
 
   return movieCard;
 };
@@ -69,8 +69,8 @@ const renderMovies = (moviesData) => {
   });
 };
 
-const showMovieId = (e) => {
-  window.alert(`영화 ID: ${e.currentTarget.id}`);
+const moveSub = (e) => {
+  location.href = `./html/sub.html?movieId=${e.currentTarget.id}`;
 };
 
 const searchMovies = (movies) => {
