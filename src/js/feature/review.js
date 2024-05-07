@@ -119,9 +119,6 @@ const createElementReview = (review) => {
   detailsElement.appendChild(dateElement);
   reviewElement.appendChild(detailsElement);
 
-  // if (review.author === getElementValue('author')) {
-  //   appendControlButtons(reviewElement, review.uuid);
-  // }
   if (localStorage.getItem(`${reviewKey}${review.uuid}`)) {
     appendControlButtons(reviewElement, review.uuid);
   }
@@ -155,101 +152,110 @@ const appendControlButtons = (reviewElement, uuid) => {
 };
 
 /**
- * @description 리뷰 요소에 패스워드 입력을 요청하는 input 요소를 추가하고, 확인 버튼을 추가.
- * 비밀번호 필드가 이미 존재하지 않는 경우, 새로운 입력 필드와 버튼을 생성하여 리뷰 요소에 추가.
- * 확인 버튼 클릭 시, 비밀번호 검증 함수를 호출.
  * @param {string} uuid 리뷰의 고유 식별자, 해당 리뷰에 대한 비밀번호 입력을 위해 사용.
  * @param {Function} onSuccess 비밀번호가 성공적으로 검증된 후 호출될 콜백 함수.
  */
 const inputPassword = (uuid, onSuccess) => {
-  let passwordInput = document.getElementById(`password_${uuid}`);
-  if (!passwordInput) {
-    const reviewElement = document.getElementById(`${reviewKey}${uuid}`);
-    passwordInput = document.createElement('input');
-    passwordInput.classList.add('password-input');
-    passwordInput.type = 'password';
-    passwordInput.placeholder = '패스워드를 입력';
-    passwordInput.id = `password_${uuid}`;
-    reviewElement.appendChild(passwordInput);
+  Swal.fire({
+    title: '비밀번호를 입력하세요',
+    input: 'password',
+    inputPlaceholder: '비밀번호를 입력하세요',
+    showCancelButton: true,
+    confirmButtonColor: '#f82f62',
+    confirmButtonText: '확인',
+    cancelButtonText: '취소',
 
-    const confirmButton = document.createElement('button');
-    confirmButton.textContent = '확인';
-    confirmButton.classList.add('confirm-btn');
-    confirmButton.addEventListener('click', () => verifyPassword(uuid, passwordInput, onSuccess));
-    reviewElement.appendChild(confirmButton);
-  }
+    // 확인 버튼 클릭시 실행
+    preConfirm: (password) => {
+      const review = JSON.parse(localStorage.getItem(`${reviewKey}${uuid}`));
+      if (password === review.password) {
+        return true;
+      } else {
+        Swal.showValidationMessage('패스워드가 일치하지 않습니다.');
+      }
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      onSuccess(uuid);
+    }
+  });
 };
 
-/**
- * @description 입력된 비밀번호가 유효한지 확인하고, 비밀번호가 일치하는 경우 콜백 함수를 호출.
- * @param {string} uuid 고유 식별자, 리뷰 데이터를 찾기 위해 사용
- * @param {HTMLElement} passwordInput 비밀번호 입력을 위한 input 요소
- * @param {Function} onSuccess 비밀번호 검증 후 호출할 콜백 함수.
- */
-const verifyPassword = (uuid, passwordInput, onSuccess) => {
-  const inputPassword = passwordInput.value;
-  const review = JSON.parse(localStorage.getItem(`${reviewKey}${uuid}`));
-  if (inputPassword === review.password) {
-    onSuccess(uuid, review);
-    passwordInput.remove();
-  } else {
-    alert('패스워드가 일치하지 않습니다.');
-  }
-};
 
 /**
  * @description 리뷰를 삭제하는 함수
  * @param {string} uuid
  */
 const handleDelete = (uuid) => {
-  if (confirm('리뷰를 삭제하시겠습니까?')) {
-    localStorage.removeItem(`${reviewKey}${uuid}`);
-    renderReviews();
-  }
+  Swal.fire({
+    title: '정말로 삭제하시겠습니까?',
+    text: "이 작업은 되돌릴 수 없습니다!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: 'red',
+    cancelButtonColor: 'gray',
+    confirmButtonText: '삭제',
+    cancelButtonText: '취소',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      localStorage.removeItem(`${reviewKey}${uuid}`);
+      Swal.fire(
+        '삭제 완료!',
+        '리뷰가 성공적으로 삭제되었습니다.',
+        'success'
+      )
+      renderReviews();
+    }
+  });
 };
+
 
 /**
  * @description 리뷰를 수정하는 함수
  * @param {string} uuid 고유 식별자
  * @param {Object} review 수정될 리뷰의 데이터 객체, author,content 속성을 포함.
  */
-const handleEdit = (uuid, review) => {
-  const reviewElement = document.getElementById(`${reviewKey}${uuid}`);
-  reviewElement.innerHTML = '';
-  const editContainer = document.createElement('div');
-  editContainer.classList.add('edit-container');
-
-  const authorInput = document.createElement('input');
-  const contentInput = document.createElement('textarea');
-  const updateButton = document.createElement('button');
-  authorInput.classList.add('edit-author');
-  contentInput.classList.add('edit-content');
-  updateButton.classList.add('edit-update-btn');
-
-  authorInput.value = review.author;
-  contentInput.value = review.content;
-  updateButton.textContent = '업데이트';
-  updateButton.addEventListener('click', () => {
-    if (validateBlank(authorInput.value).res === false) {
-      alert('작성자 이름을 입력해주세요.');
-      return;
+const handleEdit = (uuid) => {
+  const review = JSON.parse(localStorage.getItem(`${reviewKey}${uuid}`));
+  Swal.fire({
+    title: '수정할 리뷰를 입력하세요',
+    confirmButtonColor: '#f82f62',
+    confirmButtonText: '수정',
+    html: `
+      <input id="swal-input1" class="swal2-input" placeholder="작성자" value="${review.author}">
+      <textarea id="swal-input2" class="swal2-textarea" placeholder="리뷰 내용">${review.content}</textarea>`,
+    focusConfirm: false,
+    preConfirm: () => {
+      const author = document.getElementById('swal-input1').value;
+      const content = document.getElementById('swal-input2').value;
+      return { author, content }
     }
-    if (validateBlank(contentInput.value).res === false) {
-      alert('리뷰 내용을 입력해주세요.');
-      return;
+  }).then((result) => {
+    if (result.isConfirmed && result.value) {
+      const { author, content } = result.value;
+      if (validateBlank(author).res === false || validateBlank(content).res === false) {
+        Swal.fire({
+          icon: 'error',
+          title: '오류',
+          text: '모든 필드를 채워주세요!',
+          confirmButtonText: '닫기'
+        });
+      } else {
+        review.author = author;
+        review.content = content;
+        localStorage.setItem(`${reviewKey}${uuid}`, JSON.stringify(review));
+        Swal.fire({
+          title: '수정완료',
+          text: '리뷰가 수정되었습니다.',
+          icon: 'success',
+          confirmButtonColor: '#f82f62',
+          confirmButtonText: '확인',
+        })
+        renderReviews();
+      }
     }
-    review.author = authorInput.value;
-    review.content = contentInput.value;
-    localStorage.setItem(`${reviewKey}${uuid}`, JSON.stringify(review));
-    alert('리뷰가 업데이트되었습니다.');
-    renderReviews();
   });
-
-  editContainer.appendChild(authorInput);
-  editContainer.appendChild(contentInput);
-  editContainer.appendChild(updateButton);
-
-  reviewElement.appendChild(editContainer);
 };
 
 renderReviews();

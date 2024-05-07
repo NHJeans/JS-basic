@@ -1,13 +1,16 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/sub.css" />
-    <title>상세페이지</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/sub.css" />
+  <link rel="stylesheet" href="../css/swal.css">
+  <title>상세페이지</title>
+</head>
+
 
   <body>
     <a href="/src/index.html">
@@ -16,13 +19,14 @@
       </header>
     </a>
 
-    <main class="sub_page">
-      <!-- 영화 상세 정보 -->
-      <div class="movie_info" style="display: flex">
-        <div class="text_wrap">
-          <h2 class="title" id="title">
-            <!-- 영화 제목 -->
-          </h2>
+
+  <main class="sub_page">
+    <!-- 영화 상세 정보 -->
+    <div class="movie_info" style="display: flex">
+      <div class="text_wrap">
+        <h2 class="title" id="title">
+          <!-- 영화 제목 -->
+        </h2>
 
           <ul class="info_list" , id="info_list">
             <!--  영화정보-->
@@ -57,24 +61,20 @@
             </ul>
           </div>
           <div class="cont_item review_title_cont">
-            <h3 class="review-title">사용자 평</h3>
-            <button id="reviewBtn" class="review_btn">리뷰 작성</button>
-            <div id="reviewModalContainer" class="black-bg">
-              <div id="reviewModal" class="white-bg">
-                <h2 id="reviewTitle">리뷰 작성</h2>
-                <form id="reviewForm" method="POST">
-                  <label for="author">작성자명:</label>
-                  <input type="text" id="author" name="name" required />
-                  <label for="content">내용:</label>
-                  <textarea
-                    id="content"
-                    name="content"
-                    placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요."
-                    maxlength="60"
-                    required
-                  ></textarea>
-                  <label for="password">비밀번호:</label>
-                  <input type="password" id="password" name="password" required />
+          <h3 class="review-title">사용자 평</h3>
+          <button id="reviewBtn" class="review_btn">리뷰 작성</button>
+          <div id="reviewModalContainer" class="black-bg">
+            <div id="reviewModal" class="white-bg">
+              <h2 id="reviewTitle">리뷰 작성</h2>
+              <form id="reviewForm" method="POST">
+                <label for="author">작성자명:</label>
+                <input type="text" id="author" name="name" required />
+                <label for="content">내용:</label>
+                <textarea id="content" name="content" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요." maxlength="60"
+                  required></textarea>
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password" placeholder="패스워드는 4자 이상, 10자 이하이어야 합니다."
+                  required />
 
                   <input type="submit" value="저장" id="saveBtn" />
                   <input type="button" value="취소" id="cancelBtn" />
@@ -86,17 +86,18 @@
                 <p class="review-author"></p>
                 <p></p>
               </div>
-            </section>
-          </div>
+         </section>
         </div>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <script src="../js/constants/movieConstants.js"></script>
-    <script src="../js/utils/fetchUtils.js"></script>
-    <script src="../js/feature/sub.js"></script>
-    <script type="module" src="../js/index.js"></script>
-    <script type="module" src="../js/feature/review.modal.js"></script>
-    <script type="module" src="../js/feature/review.js"></script>
-  </body>
+  <script src="../js/constants/movieConstants.js"></script>
+  <script src="../js/utils/fetchUtils.js"></script>
+  <script src="../js/feature/sub.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+  <script type="module" src="../js/index.js"></script>
+  <script type="module" src="../js/feature/review.modal.js"></script>
+  <script type="module" src="../js/feature/review.js"></script>
+</body>
 </html>
