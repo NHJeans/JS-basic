@@ -1,10 +1,14 @@
 let moviesData = [];
+let fetchUtils = new FetchUtils();
+
+document.addEventListener('DOMContentLoaded', function () {
+  getMoviesHandler();
+});
 
 const getMovies = async () => {
   try {
-    let fetchUtils = new FetchUtils();
     const response = await fetchUtils.get(`${BASE_URL_KEY}${MOVIES_PATH}`, (method) =>
-        fetchUtils.setupOptions(method, fetchUtils.APPLICATION_JSON, API_KEY)
+      fetchUtils.setupOptions(method, fetchUtils.APPLICATION_JSON, API_KEY)
     );
     const data = await response.json();
     // console.log(data.results)
@@ -89,12 +93,16 @@ document.getElementById('search-form').addEventListener('submit', function (e) {
   searchMovies(moviesData);
 });
 
-// 메인으로 돌아가는 버튼
+/**
+ * 메인으로 돌아가는 버튼
+ * */
 document.querySelector('header h1').addEventListener('click', () => {
   window.location.reload();
 });
 
-// 최상단으로 가는 버튼
+/**
+ * 최상단으로 가는 버튼
+ * */
 document.querySelector('.up-btn').addEventListener('click', () => {
   window.scrollTo({
     top: 0,
@@ -102,7 +110,9 @@ document.querySelector('.up-btn').addEventListener('click', () => {
   });
 });
 
-// 검색창 초기화 버튼
+/**
+ * 검색창 초기화 버튼
+ * */
 const resetBtn = document.querySelector('#reset-btn');
 const inputValue = document.querySelector('#search-input');
 resetBtn.addEventListener('click', () => {
@@ -111,21 +121,107 @@ resetBtn.addEventListener('click', () => {
   inputValue.value = '';
 });
 
-getMovies();
-const swiperOption = {
-  slidesPerView: 6,
-  loop: true,
-  centeredSlides: true,
-  spaceBetween: 15,
-  pagination: {
-    el: '.swiper-pagination',
-    type: 'fraction',
-  },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
+/**
+ * 스와이퍼 셋팅
+ * */
+const setupSwiper = () => {
+  const swiperOption = {
+    slidesPerView: 6,
+    loop: true,
+    centeredSlides: false,
+    spaceBetween: 15,
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'fraction',
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  };
+
+  const TYPE_SET = new Set([MY_SWIPER, SUB_SWIPER]);
+
+  for (const type of TYPE_SET) {
+    new Swiper(`.${type}`, swiperOption);
+  }
 };
 
-const mainSwiper = new Swiper('.mySwiper', swiperOption);
-const subSwiper = new Swiper('.subSwiper', swiperOption);
+/**
+ * 영화들 조회 핸들러
+ * */
+const getMoviesHandler = () => {
+  let promiseList = [];
+
+  REQUEST_ARGUMENT_MAP_LIST.forEach((requestMap) => {
+    promiseList.push(
+      fetchMoviesInfo(requestMap.get('url'), (response) =>
+        makeMoviesHtml(response, requestMap.get('type'), requestMap.get('category'))
+      )
+    );
+  });
+
+  // 병렬 처리 후 성공한 것만 html 셋팅
+  Promise.all(promiseList).then((htmlList) => {
+    const movieContainerElement = document.querySelector('.movie-container');
+    htmlList
+      .filter((value) => value !== undefined)
+      .forEach((html) => {
+        movieContainerElement.appendChild(html);
+        setupSwiper();
+      });
+  });
+};
+
+/**
+ *  영화 정보 조회
+ * */
+const fetchMoviesInfo = async (url, makeHtmlCallBack) => {
+  return fetchUtils
+    .get(url, (method) => fetchUtils.setupOptions(method, fetchUtils.APPLICATION_JSON, API_KEY))
+    .then((response) => response.json())
+    .then((responseOfJson) => makeHtmlCallBack(responseOfJson))
+    .catch((e) => console.log(e));
+};
+
+/**
+ * 영화 HTML Make
+ * */
+const makeMoviesHtml = (response, type, category) => {
+  const wrapperDiv = document.createElement('div');
+
+  wrapperDiv.innerHTML = `
+        <div #swiperRef="" class="swiper ${type}">
+                  <h1 class="movie-category">
+            ${category}
+          </h1>
+        <div class="swiper-wrapper">
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+      <div class="divider"></div>
+  `;
+
+  const imageClassName = type === SUB_SWIPER ? 'sub' : '';
+  const hidden = type === SUB_SWIPER ? 'hidden' : '';
+  const maxSize = type === MY_SWIPER ? 10 : response.results.length;
+
+  for (let i = 0; i < maxSize; i++) {
+    const { id, poster_path: posterPath } = response.results[i];
+    let html = ` 
+         <div class="swiper-slide ${imageClassName}" id="${id}" >
+              <h1 class="movie-top-10" style="font-size: 100px; margin-left: 0px; color: white" ${hidden}>${i + 1} </h1>
+            <img class="${imageClassName}" src="${IMAGE_BASE_URL}${IMAGE_PATH}${posterPath}"/>
+         </div>`;
+
+    let swiperWrapperElement = wrapperDiv.querySelector('.swiper-wrapper');
+    swiperWrapperElement.innerHTML += html;
+  }
+
+  const swiperSlide = wrapperDiv.querySelectorAll('.swiper-slide');
+  swiperSlide.forEach((item) => {
+    item.addEventListener('click', moveSub);
+  });
+  return wrapperDiv;
+};
