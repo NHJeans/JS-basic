@@ -103,7 +103,7 @@ const createElementReview = (review) => {
 
 
   const authorElement = document.createElement('p');
-  authorElement.textContent = review.content;
+  authorElement.textContent = review.author;
   authorElement.classList.add('review-author');
 
   const contentElement = document.createElement('p');
