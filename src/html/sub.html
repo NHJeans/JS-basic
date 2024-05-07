@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,12 +13,12 @@
 </head>
 
 
-  <body>
-    <a href="/src/index.html">
-      <header>
-        <h1>최고 평점 영화 콜렉션</h1>
-      </header>
-    </a>
+<body>
+  <a href="/src/index.html">
+    <header>
+      <h1>최고 평점 영화 콜렉션</h1>
+    </header>
+  </a>
 
 
   <main class="sub_page">
@@ -28,39 +29,39 @@
           <!-- 영화 제목 -->
         </h2>
 
-          <ul class="info_list" , id="info_list">
-            <!--  영화정보-->
-          </ul>
+        <ul class="info_list" , id="info_list">
+          <!--  영화정보-->
+        </ul>
 
-          <p class="desc" id="desc">
-            <!--  영화줄거리-->
-          </p>
-        </div>
-        <div class="movie_image_form">
-          <img id="movie_image" />
-        </div>
+        <p class="desc" id="desc">
+          <!--  영화줄거리-->
+        </p>
       </div>
+      <div class="movie_image_form">
+        <img id="movie_image" />
+      </div>
+    </div>
 
-      <div class="movie_cont">
-        <!-- 컨텐츠 정보 -->
-        <div class="cont_info">
-          <div class="cont_item">
-            <h3 class="title">관련 동영상</h3>
-            <ul class="video_list" id="video_list">
-              <!-- 관련 동영상 -->
-            </ul>
-          </div>
+    <div class="movie_cont">
+      <!-- 컨텐츠 정보 -->
+      <div class="cont_info">
+        <div class="cont_item">
+          <h3 class="title">관련 동영상</h3>
+          <ul class="video_list" id="video_list">
+            <!-- 관련 동영상 -->
+          </ul>
+        </div>
 
-          <div class="cont_item">
-            <div class="title_area">
-              <h3 class="title">감독/출연</h3>
-              <!-- <a href="" class="btn_more">더보기</a> -->
-            </div>
-            <ul class="char_list" id="char_list">
-              <!--              등장인물-->
-            </ul>
+        <div class="cont_item">
+          <div class="title_area">
+            <h3 class="title">감독/출연</h3>
+            <!-- <a href="" class="btn_more">더보기</a> -->
           </div>
-          <div class="cont_item review_title_cont">
+          <ul class="char_list" id="char_list">
+            <!--              등장인물-->
+          </ul>
+        </div>
+        <div class="cont_item review_title_cont">
           <h3 class="review-title">사용자 평</h3>
           <button id="reviewBtn" class="review_btn">리뷰 작성</button>
           <div id="reviewModalContainer" class="black-bg">
@@ -76,17 +77,17 @@
                 <input type="password" id="password" name="password" placeholder="패스워드는 4자 이상, 10자 이하이어야 합니다."
                   required />
 
-                  <input type="submit" value="저장" id="saveBtn" />
-                  <input type="button" value="취소" id="cancelBtn" />
-                </form>
-              </div>
+                <input type="submit" value="저장" id="saveBtn" />
+                <input type="button" value="취소" id="cancelBtn" />
+              </form>
             </div>
-            <section>
-              <div id="reviewContainer">
-                <p class="review-author"></p>
-                <p></p>
-              </div>
-         </section>
+          </div>
+          <section>
+            <div id="reviewContainer">
+              <p class="review-author"></p>
+              <p></p>
+            </div>
+          </section>
         </div>
       </div>
     </div>
@@ -100,4 +101,5 @@
   <script type="module" src="../js/feature/review.modal.js"></script>
   <script type="module" src="../js/feature/review.js"></script>
 </body>
+
 </html>
