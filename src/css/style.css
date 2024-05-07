@@ -4,11 +4,11 @@
 }
 
 body {
-
-  font-family: Helvetica Neue,
-  Helvetica,
-  Arial,
-  sans-serif;
+  font-family:
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif;
   font-size: 14px;
   color: #000;
   margin: 0;
@@ -99,8 +99,9 @@ section {
 .movie-card {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12),
-  0 3px 6px rgba(0, 0, 0, 0.24);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.12),
+    0 3px 6px rgba(0, 0, 0, 0.24);
   margin: 20px;
   justify-self: center;
   background-color: #000;
@@ -125,7 +126,28 @@ section {
   color: #babac1;
 }
 
+.movie-container {
+  background-color: black;
+}
+
+.movie-category {
+  margin: 10px auto 10px 10px;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0px;
+  line-height: 26px;
+}
+
+.movie-top-10 {
+  position: fixed;
+  bottom: 30px;
+  right: 590px;
+  padding-left: 50px;
+}
+
 .up-btn {
+  z-index: 1; /* 다른 요소 위에 위치하도록 설정 */
   position: fixed;
   bottom: 25px;
   right: 20px;
@@ -138,21 +160,28 @@ section {
 }
 
 .swiper-slide {
+  cursor: pointer;
+  margin-left: 100px;
   text-align: center;
   font-size: 18px;
-  background: #fff;
+  background: black;
   display: flex;
   justify-content: center;
   align-items: center;
   width: fit-content !important;
 }
 
+.swiper-slide.sub {
+  margin-left: 0px;
+}
+
 .swiper-slide img {
   display: block;
   width: 600px;
   height: 100%;
-  object-fit: cover;
-  border-radius: 30px;
+  object-fit: inherit;
+  /*object-fit: cover;*/
+  /*border-radius: 30px;*/
 }
 
 .swiper {
@@ -182,11 +211,12 @@ section {
   display: block;
   width: 300px;
   height: 100%;
-  object-fit: cover;
-  border-radius: 30px;
+  object-fit: inherit;
+  /*object-fit: cover;*/
+  /*border-radius: 30px;*/
 }
 
-.divider{
+.divider {
   padding: 20px 0 20px 0;
   background-color: #000;
 }

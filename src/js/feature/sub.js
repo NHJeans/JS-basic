@@ -52,7 +52,7 @@ const getMovieDetailHandler = async (movieId) => {
 /**
  *  영화 상세 정보 조회
  * */
-let getMovieDetailInfo = async (url, makeHtmlCallBack) => {
+const getMovieDetailInfo = (url, makeHtmlCallBack) => {
   return fetchUtils
     .get(url, (method) => fetchUtils.setupOptions(method, fetchUtils.APPLICATION_JSON, API_KEY))
     .then((response) => response.json())
