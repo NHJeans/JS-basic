@@ -1,0 +1,8 @@
+.swal2-html-container .swal2-input,
+.swal2-textarea {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  width: 400px !important;
+  margin: 5px auto !important;
+  padding: 10px !important;
+}
