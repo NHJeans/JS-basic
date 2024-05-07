@@ -1,17 +1,15 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/layout.css" />
-    <link rel="stylesheet" href="../css/sub.css" />
-    <script src="../js/constants/movieConstants.js"></script>
-    <script src="../js/utils/fetchUtils.js"></script>
-    <script src="../js/feature/sub.js"></script>
-    <title>상세페이지</title>
-  </head>
+
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/sub.css" />
+  <title>상세페이지</title>
+</head>
 
   <body>
     <a href="/src/index.html">
@@ -28,98 +26,96 @@
             <!-- 영화 제목 -->
           </h2>
 
-          <ul class="info_list" , id="info_list">
-            <!--  영화정보-->
-          </ul>
-
-          <p class="desc" id="desc">
-            <!--  영화줄거리-->
-          </p>
-
-          <div class="btn_box">
-            <button type="button">미리보기</button>
-            <div class="btn_two">
-              <button class="btn_pink" type="button">구매하기</button>
-              <button class="btn_pink" type="button">선물하기</button>
-            </div>
-          </div>
-        </div>
-        <div class="movie_image_form">
-          <img id="movie_image" />
-        </div>
-      </div>
-
-      <div class="movie_cont">
-        <!-- 이벤트 -->
-        <ul class="event_list">
-          <li>개별 구매로 평생 소장할 수 있는 콘텐츠예요</li>
-          <li>5/6(월)까지 대여・소장 20% 할인!</li>
+        <ul class="info_list" , id="info_list">
+          <!--  영화정보-->
         </ul>
 
-        <!-- 배너 -->
-        <div class="banner">
-          <img
-            src="https://an2-img.amz.wtchn.net/image/v2/0Y3ylNlyg2ys-JP6PqYiZA.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmNISnZiVzkwYVc5dUx6SXhOamMzTVRBeU56RTBOVGczT0RjaWZRLjdVZEQxNlhORGx6N0RYaWhITmI4RmMtbk5od0llTkYxT3JDN1Jmc2FMYWs"
-            alt="천만 돌파 묫바람 파묘 5/6까지 20% 할인"
-          />
-        </div>
+        <p class="desc" id="desc">
+          <!--  영화줄거리-->
+        </p>
 
-        <!-- 컨텐츠 정보 -->
-        <div class="cont_info">
-          <div class="cont_item">
-            <h3 class="title">관련 동영상</h3>
-            <ul class="video_list" id="video_list">
-              <!-- 관련 동영상 -->
-            </ul>
-          </div>
-
-          <div class="cont_item">
-            <div class="title_area">
-              <h3 class="title">감독/출연</h3>
-              <!-- <a href="" class="btn_more">더보기</a> -->
-            </div>
-            <ul class="char_list" id="char_list">
-              <!--              등장인물-->
-            </ul>
-          </div>
-          <div class="cont_item review_title_cont">
-            <h3 class="review-title">사용자 평</h3>
-            <button id="reviewBtn" class="review_btn">리뷰 작성</button>
-            <div id="reviewModalContainer" class="black-bg">
-              <div id="reviewModal" class="white-bg">
-                <h2 id="reviewTitle">리뷰 작성</h2>
-                <form id="reviewForm">
-                  <label for="author">작성자명:</label>
-                  <input type="text" id="author" name="name" required />
-                  <label for="content">내용:</label>
-                  <textarea
-                    id="content"
-                    name="content"
-                    placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요."
-                    maxlength="60"
-                    required
-                  ></textarea>
-                  <label for="password">비밀번호:</label>
-                  <input type="password" id="password" name="password" required />
-
-                  <input type="submit" value="저장" id="saveBtn" />
-                  <input type="button" value="취소" id="cancelBtn" />
-                </form>
-              </div>
-            </div>
-            <section>
-              <div id="reviewContainer">
-                <p class="review-author"></p>
-                <p></p>
-              </div>
-            </section>
+        <div class="btn_box">
+          <button type="button">미리보기</button>
+          <div class="btn_two">
+            <button class="btn_pink" type="button">구매하기</button>
+            <button class="btn_pink" type="button">선물하기</button>
           </div>
         </div>
       </div>
-    </main>
+      <div class="movie_image_form">
+        <img id="movie_image" />
+      </div>
+    </div>
 
-    <script type="module" src="../js/index.js"></script>
-    <script type="module" src="../js/feature/review.modal.js"></script>
-    <script type="module" src="../js/feature/review.js"></script>
-  </body>
+    <div class="movie_cont">
+      <!-- 이벤트 -->
+      <ul class="event_list">
+        <li>개별 구매로 평생 소장할 수 있는 콘텐츠예요</li>
+        <li>5/6(월)까지 대여・소장 20% 할인!</li>
+      </ul>
+
+      <!-- 배너 -->
+      <div class="banner">
+        <img
+          src="https://an2-img.amz.wtchn.net/image/v2/0Y3ylNlyg2ys-JP6PqYiZA.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1KbklsMHNJbkFpT2lJdmRqSXZjM1J2Y21VdmNISnZiVzkwYVc5dUx6SXhOamMzTVRBeU56RTBOVGczT0RjaWZRLjdVZEQxNlhORGx6N0RYaWhITmI4RmMtbk5od0llTkYxT3JDN1Jmc2FMYWs"
+          alt="천만 돌파 묫바람 파묘 5/6까지 20% 할인" />
+      </div>
+
+      <!-- 컨텐츠 정보 -->
+      <div class="cont_info">
+        <div class="cont_item">
+          <h3 class="title">관련 동영상</h3>
+          <ul class="video_list" id="video_list">
+            <!-- 관련 동영상 -->
+          </ul>
+        </div>
+
+        <div class="cont_item">
+          <div class="title_area">
+            <h3 class="title">감독/출연</h3>
+            <!-- <a href="" class="btn_more">더보기</a> -->
+          </div>
+          <ul class="char_list" id="char_list">
+            <!--              등장인물-->
+          </ul>
+        </div>
+        <div class="cont_item review_title_cont">
+          <h3 class="review-title">사용자 평</h3>
+          <button id="reviewBtn" class="review_btn">리뷰 작성</button>
+          <div id="reviewModalContainer" class="black-bg">
+            <div id="reviewModal" class="white-bg">
+              <h2 id="reviewTitle">리뷰 작성</h2>
+              <form id="reviewForm" method="POST">
+                <label for="author">작성자명:</label>
+                <input type="text" id="author" name="name" required />
+                <label for="content">내용:</label>
+                <textarea id="content" name="content" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요." maxlength="60"
+                  required></textarea>
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password" required />
+
+                <input type="submit" value="저장" id="saveBtn" />
+                <input type="button" value="취소" id="cancelBtn" />
+              </form>
+            </div>
+          </div>
+          <section>
+            <div id="reviewContainer">
+              <p class="review-author"></p>
+              <p></p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/constants/movieConstants.js"></script>
+  <script src="../js/utils/fetchUtils.js"></script>
+  <script src="../js/feature/sub.js"></script>
+  <script type="module" src="../js/index.js"></script>
+  <script type="module" src="../js/feature/review.modal.js"></script>
+  <script type="module" src="../js/feature/review.js"></script>
+</body>
+
 </html>
