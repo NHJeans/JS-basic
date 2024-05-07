@@ -32,7 +32,8 @@ document.getElementById('saveBtn').addEventListener('click', (e) => {
     content,
     password,
     uuid,
-    movieId
+    movieId,
+    timestamp: Date.now()
   };
   try {
     localStorage.setItem(`${reviewKey}${uuid}`, JSON.stringify(reviewData));
@@ -58,11 +59,12 @@ const getReviewData = () => {
     const key = localStorage.key(i);
     if (key.includes('review_')) {
       const data = JSON.parse(localStorage.getItem(key));
-      if (data.movieId === currentMovieId) { // 현재 페이지의 movieId와 일치하는 데이터만 추가
+      if (data.movieId === currentMovieId) {
         reviewData.push(data);
       }
     }
   }
+  reviewData.sort((a, b) => b.timestamp - a.timestamp);
   return reviewData;
 }
 /**
@@ -80,6 +82,10 @@ const renderReviews = () => {
   })
 };
 
+const convertTimestampToDate = (timestamp) => {
+  const date = new Date(timestamp);
+  return date.toLocaleString();
+};
 
 /**
  * @description 리뷰 데이터를 받아 리뷰를 나타내는 HTML 요소를 생성, 로컬스토리지에서 고유값 uuid를 찾아 리뷰를 삭제할 수 있는 버튼을 추가
@@ -104,9 +110,13 @@ const createElementReview = (review) => {
   contentElement.textContent = review.content;
   contentElement.classList.add('review-content');
 
+  const dateElement = document.createElement('p');
+  dateElement.textContent = `작성일 : ${convertTimestampToDate(review.timestamp)}`;
+  dateElement.classList.add('review-content');
 
   detailsElement.appendChild(authorElement);
   detailsElement.appendChild(contentElement);
+  detailsElement.appendChild(dateElement);
   reviewElement.appendChild(detailsElement);
 
   // if (review.author === getElementValue('author')) {
