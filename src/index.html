@@ -31,8 +31,7 @@
     </h1>
   </header>
 
-  <main>
-    <div class="movie-container">
+    <main>
       <div class="search-container">
         <form class="search" id="search-form">
           <label></label>
@@ -42,11 +41,14 @@
           <button type="button" class="material-symbols-outlined" id="reset-btn">cancel</button>
         </form>
       </div>
-    </div>
-    <div id="up-btn">
-      <button class="up-btn"><i class="fa-solid fa-arrow-up fa-2x"></i></button>
-    </div>
-  </main>
+      <div class="movie-container" id="movie-container"></div>
+      <div class="card-list" id="card-list" hidden>
+        <!--        서치된 내용들-->
+      </div>
+      <div id="up-btn">
+        <button class="up-btn"><i class="fa-solid fa-arrow-up fa-2x"></i></button>
+      </div>
+    </main>
 
   <footer class="footer">
     <div class="footer-content">
@@ -68,14 +70,11 @@
     </div>
   </footer>
 
-
-
-  <!-- 스크립트 -->
-  <script src="./js/constants/movieConstants.js"></script>
-  <script src="./js/utils/fetchUtils.js"></script>
-  <script src="https://kit.fontawesome.com/72fc008e44.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script type="module" src="./js/index.js"></script>
-</body>
-
+    <!-- 스크립트 -->
+    <script src="./js/constants/movieConstants.js"></script>
+    <script src="./js/utils/fetchUtils.js"></script>
+    <script src="https://kit.fontawesome.com/72fc008e44.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="./js/index.js"></script>
+  </body>
 </html>
