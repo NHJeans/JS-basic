@@ -145,9 +145,15 @@ const getMoviesHandler = () => {
  * */
 const setupSwiper = () => {
   const swiperOption = {
-    slidesPerView: 6,
+    slidesPerView: 5,
+    slidesPerGroup: 2,
     loop: true,
+    speed: 600,
     centeredSlides: false,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
     spaceBetween: 15,
     pagination: {
       el: '.swiper-pagination',
@@ -204,6 +210,7 @@ const makeMoviesHtml = (response, type, category) => {
     const { id, poster_path: posterPath } = response.results[i];
     let html = ` 
          <div class="swiper-slide ${imageClassName}" id="${id}" >
+         <div class="overlay"></div>
               <h1 class="movie-top-10" style="font-size: 100px; margin-left: 0px; color: white" ${hidden}>${i + 1} </h1>
             <img class="${imageClassName}" src="${IMAGE_BASE_URL}${IMAGE_PATH}${posterPath}"/>
          </div>`;
@@ -213,8 +220,16 @@ const makeMoviesHtml = (response, type, category) => {
   }
 
   const swiperSlide = wrapperDiv.querySelectorAll('.swiper-slide');
+
   swiperSlide.forEach((item) => {
+    item.addEventListener('mouseover', function () {
+      this.querySelector('.overlay').style.opacity = 1;
+    });
+    item.addEventListener('mouseout', function () {
+      this.querySelector('.overlay').style.opacity = 0;
+    });
     item.addEventListener('click', moveSub);
   });
   return wrapperDiv;
 };
+
