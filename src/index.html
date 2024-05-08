@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="./css/layout.css" />
   <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/response.css" />
   <title>내배캠 최고 평점 영화 콜렉션</title>
 </head>
 
@@ -35,11 +36,12 @@
       <div class="search-container">
         <form class="search" id="search-form">
           <label></label>
-          <!-- 디자인 변경, cdn 확인 -->
           <input type="text" id="search-input" placeholder="영화 제목을 검색해 보세요" />
           <button type="submit" class="material-icons" id="search-btn">search</button>
-          <button type="button" class="material-symbols-outlined" id="reset-btn">cancel</button>
+          <button type="reset" class="material-symbols-outlined" id="reset-btn">cancel</button>
         </form>
+
+        <ul class="card-list"></ul>
       </div>
       <div class="movie-container" id="movie-container"></div>
       <div class="card-list" id="card-list" hidden>

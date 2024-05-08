@@ -1,0 +1,108 @@
+@media screen and (max-width: 1550px) {
+  .sub_page .movie_cont .video_list li {
+    width: 380px;
+    height: 205px;
+  }
+  .sub_page .movie_cont .video_list a {
+    width: 100%;
+    height: 100%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .sub_page .movie_cont .video_list {
+    justify-content: center;
+    gap: 60px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .card-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .sub_page .movie_info {
+    display: block;
+  }
+  .movie_image_form {
+    margin-top: 40px;
+  }
+  .sub_page .movie_info .text_wrap {
+    width: 100%;
+  }
+  .sub_page .movie_cont .video_list li {
+    width: 350px;
+    height: 205px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .card-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .sub_page .movie_cont .video_list li {
+    width: 300px;
+    height: 175px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .card-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  header img {
+    width: 60px;
+    height: 60px;
+    margin: 20px 0 20px 50px;
+  }
+  .sub_page {
+    padding: 0 50px 40px;
+  }
+  .sub_page .movie_info .title {
+    font-size: 28px;
+  }
+  .footer-content {
+    display: block;
+  }
+  .sub_page .movie_info .info_list {
+    margin-top: 15px;
+  }
+  .sub_page .movie_info .info_list > li {
+    font-size: 12px;
+  }
+  .sub_page .movie_info .info_list > li:first-child {
+    margin-right: 4px;
+  }
+  .sub_page .movie_info .info_list > li:not(:first-child) {
+    padding-left: 4px;
+    margin-right: 4px;
+  }
+  .sub_page .movie_info .like_btn {
+    display: none;
+  }
+  #reviewContainer {
+    padding-top: 20px;
+  }
+  .review_btn {
+    right: 0;
+    top: -7px;
+    padding: 8px 22px;
+  }
+  .review-list {
+    display: block;
+  }
+  .review-button-div {
+    display: block;
+    padding: 0;
+    margin-top: 10px;
+  }
+  .review-content {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 550px) {
+  .card-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  header img {
+    margin: 20px 0 20px 20px;
+  }
+  .sub_page {
+    padding: 0 20px 40px;
+  }
+}

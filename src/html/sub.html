@@ -10,6 +10,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href='../asset/logo.png'>
   <link rel="stylesheet" href="../css/sub.css" />
   <link rel="stylesheet" href="../css/swal.css">
+  <link rel="stylesheet" href="../css/response.css">
   <title>상세페이지</title>
 </head>
 
@@ -26,15 +27,18 @@
 
   <main class="sub_page">
     <!-- 영화 상세 정보 -->
-    <div class="movie_info" style="display: flex">
+    <div class="movie_info">
       <div class="text_wrap">
         <h2 class="title" id="title">
           <!-- 영화 제목 -->
         </h2>
 
-        <ul class="info_list" , id="info_list">
-          <!--  영화정보-->
-        </ul>
+        <div class="info_wrap">
+          <ul class="info_list" , id="info_list">
+            <!--  영화정보-->
+          </ul>
+          <div class="like_btn"></div>
+        </div>
 
         <p class="desc" id="desc">
           <!--  영화줄거리-->
@@ -123,6 +127,7 @@
   <script type="module" src="../js/index.js"></script>
   <script type="module" src="../js/feature/review.modal.js"></script>
   <script type="module" src="../js/feature/review.js"></script>
+  <script type="module" src="../js/feature/like.js"></script>
 </body>
 
 </html>
