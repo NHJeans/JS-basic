@@ -167,28 +167,98 @@ const getMoviesHandler = async () => {
  * 스와이퍼 셋팅
  * */
 const setupSwiper = () => {
-  const swiperOption = {
-    slidesPerView: 6,
-    loop: true,
-    centeredSlides: false,
-    spaceBetween: 15,
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'fraction',
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  };
-
   const TYPE_SET = new Set([MY_SWIPER, SUB_SWIPER]);
 
   for (const type of TYPE_SET) {
+    let swiperOption;
+    if (type === MY_SWIPER) {
+      swiperOption = {
+        slidesPerView: 3,
+        slidesPerGroup: 1,
+        centeredSlides: true,
+        loop: true,
+        speed: 600,
+        centeredSlides: false,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        spaceBetween: 15,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'fraction',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          1400: {
+            slidesPerView: 3
+          },
+          1200: {
+            slidesPerView: 2
+          },
+          992: {
+            slidesPerView: 2
+          },
+          768: {
+            slidesPerView: 1
+          },
+          576: {
+            slidesPerView: 1
+          },
+          300: {
+            slidesPerView: 1
+          },
+        },
+      };
+    } else if (type === SUB_SWIPER) {
+
+      swiperOption = {
+        slidesPerView: 5,
+        slidesPerGroup: 5,
+        loop: true,
+        speed: 600,
+        centeredSlides: false,
+        autoplay: {
+          delay: 2000,
+          disableOnInteraction: false,
+        },
+        breakpoints: {
+          1400: {
+            slidesPerView: 5
+          },
+          1200: {
+            slidesPerView: 4
+          },
+          992: {
+            slidesPerView: 3
+          },
+          768: {
+            slidesPerView: 2
+          },
+          576: {
+            slidesPerView: 1
+          },
+          300: {
+            slidesPerView: 1
+          },
+        },
+        spaceBetween: 15,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'fraction',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      };
+    }
     new Swiper(`.${type}`, swiperOption);
   }
 };
-
 /**
  *  영화 정보 조회
  * */
@@ -226,6 +296,7 @@ const makeMoviesHtml = (response, type, category) => {
     const { id, poster_path: posterPath } = response.results[i];
     let html = ` 
          <div class="swiper-slide ${imageClassName}" id="${id}" >
+         <div class="overlay"></div>
               <h1 class="movie-top-10" style="font-size: 100px; margin-left: 0px; color: white" ${hidden}>${i + 1} </h1>
             <img class="${imageClassName}" src="${IMAGE_BASE_URL}${IMAGE_PATH}${posterPath}"/>
          </div>`;
@@ -235,8 +306,16 @@ const makeMoviesHtml = (response, type, category) => {
   }
 
   const swiperSlide = wrapperDiv.querySelectorAll('.swiper-slide');
+
   swiperSlide.forEach((item) => {
+    item.addEventListener('mouseover', function () {
+      this.querySelector('.overlay').style.opacity = 1;
+    });
+    item.addEventListener('mouseout', function () {
+      this.querySelector('.overlay').style.opacity = 0;
+    });
     item.addEventListener('click', moveSub);
   });
   return wrapperDiv;
 };
+
