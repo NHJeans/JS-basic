@@ -10,6 +10,7 @@ header img {
 }
 
 body {
+  max-width: 1500px;
   margin: 0 auto;
   background-color: #000;
 }
@@ -116,8 +117,9 @@ body {
   margin: 0 auto;
 }
 .sub_page .movie_cont .cont_info {
-  margin-top: 70px;
-  max-width: 1020px;
+  /*margin-top: 70px;*/
+  /*max-width: 1020px;*/
+  margin: 70px auto 0px auto;
 }
 .sub_page .movie_cont .cont_item {
   margin-top: 40px;
