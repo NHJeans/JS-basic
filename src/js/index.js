@@ -35,7 +35,6 @@ document.getElementById('search-form').addEventListener('submit', async function
   e.preventDefault();
   await searchMoviesHandler();
 });
-
 /**
  * 검색 키워드 영화 목록 조회
  * */

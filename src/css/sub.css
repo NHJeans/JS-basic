@@ -6,23 +6,24 @@ header {
 header img {
   width: 90px;
   height: 90px;
-  margin: 30px 0 20px 30px;
+  margin: 30px 0 20px 100px;
 }
 
 body {
-  max-width: 1500px;
+  max-width: 1700px;
   margin: 0 auto;
   background-color: #000;
 }
 
 .sub_page {
-  padding: 20px 0 30px 40px;
+  padding: 0 100px 100px;
   background-color: #000;
 }
 .sub_page .movie_info {
+  display: flex;
   width: 100%;
   margin: 0 auto;
-  padding-bottom: 20px;
+  padding-bottom: 60px;
   border-bottom: 1px solid #1b1c1d;
 }
 .sub_page .movie_info .text_wrap {
@@ -32,6 +33,11 @@ body {
   font-size: 40px;
   font-weight: 700;
   color: #fff;
+}
+.sub_page .movie_info .info_wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .sub_page .movie_info .info_list {
   display: flex;
@@ -58,6 +64,14 @@ body {
   top: 50%;
   left: 0;
   transform: translateY(-50%);
+}
+.sub_page .movie_info .like_btn {
+  width: 32px;
+  height: 32px;
+  background: url('../asset/ic_heart_off_24.svg') no-repeat center / 100%;
+}
+.sub_page .movie_info .like_btn.on {
+  background-image: url('../asset/ic_heart_on_24.svg');
 }
 .sub_page .movie_info .desc {
   margin-top: 10px;
@@ -92,9 +106,9 @@ body {
 .sub_page .movie_info .btn_box button:not(:first-child) {
   margin-left: 10px;
 }
-.sub_page .movie_cont {
+/* .sub_page .movie_cont {
   padding: 30px 0;
-}
+} */
 .sub_page .movie_cont .event_list > li {
   font-size: 15px;
   color: #babac1;
@@ -117,12 +131,10 @@ body {
   margin: 0 auto;
 }
 .sub_page .movie_cont .cont_info {
-  /*margin-top: 70px;*/
-  /*max-width: 1020px;*/
-  margin: 70px auto 0px auto;
+  margin: 40px auto 0px;
 }
 .sub_page .movie_cont .cont_item {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 .sub_page .movie_cont .title {
   margin-bottom: 10px;
@@ -132,8 +144,9 @@ body {
 }
 .sub_page .movie_cont .video_list {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 60px 0;
 }
 .sub_page .movie_cont .video_list li {
   width: 330px;
