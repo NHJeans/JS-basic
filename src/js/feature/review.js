@@ -50,7 +50,7 @@ const redirectToDetailPage = (movieId) => {
 };
 /**
  * @returns {Array} Array of review objects.
- * @description 로컬 스토지에 저장된 데이터를 순회하며 'review_'로 시작하는 키를 가진 데이터를 찾아 배열에 추가
+ * @description 로컬 스토지에 저장된 데이터를 순회하며 'review_'로 시작하는 키를 가진 데이터를 찾고 movieid가 쿼리스트링 movieid랑 같으면 배열에 추가
  */
 const getReviewData = () => {
   const currentMovieId = new URLSearchParams(window.location.search).get('movieId');
@@ -68,7 +68,7 @@ const getReviewData = () => {
   return reviewData;
 }
 /**
- * @description 리뷰 데이터를 가져와서 리뷰를 렌더링
+ * @description getReviewData() 함수를 호출하여 관련 리뷰 데이터를 가져온 후, 리뷰를 렌더링
  */
 
 const renderReviews = () => {

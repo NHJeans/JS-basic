@@ -1,4 +1,19 @@
 /* 상세페이지 */
+header {
+  background-color: #000;
+}
+
+header img {
+  width: 90px;
+  height: 90px;
+  margin: 30px 0 20px 30px;
+}
+
+body {
+  margin: 0 auto;
+  background-color: #000;
+}
+
 .sub_page {
   padding: 20px 0 30px 40px;
   background-color: #000;
@@ -441,4 +456,54 @@ label {
 .edit-update-btn {
   cursor: pointer;
   padding: 9px;
+}
+
+/* footer */
+.footer {
+  background-color: #262626;
+  color: #6e6d6d;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0 40px 0;
+}
+
+.footer-info-box,
+.footer-links {
+  text-align: left;
+}
+
+.footer-logo {
+  width: 70px;
+  margin: 20px;
+}
+.team-list,
+.footer-info-box p {
+  margin-left: 30px;
+}
+
+.team-list {
+  padding: 0;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: start;
+  white-space: nowrap;
+}
+
+.team-list li {
+  margin-right: 30px;
+  white-space: nowrap;
+}
+
+.footer-links img {
+  width: 100px;
+  height: 100px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
