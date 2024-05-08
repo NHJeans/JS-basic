@@ -11,8 +11,8 @@ TMDB API를 활용한 영화 검색 및 리뷰작성 사이트입니다.
 
 ## 🔖 링크
 
-<a href="https://nhjeans.github.io/JS-basic/
-">https://nhjeans.github.io/JS-basic/</a>
+<a href="https://js-basic-1013s-projects.vercel.app/
+">https://js-basic-1013s-projects.vercel.app/</a>
 
 ### 😎 Members
 
