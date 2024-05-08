@@ -24,6 +24,7 @@ header img {
 }
 
 body {
+  max-width: 1500px;
   /* font-family: 'Ddag', sans-serif; */
   /* font-family: 'Roboto', sans-serif; */
   font-family: 'Noto Sans KR', sans-serif;
