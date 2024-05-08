@@ -20,18 +20,18 @@ const getMovieDetailHandler = async (movieId) => {
   }
 
   // 영화 기본 정보
-  const movieDefaultInfoHtml = getMovieDetailInfo(`${BASE_URL_KEY}${MOVIE_PATH}/${movieId}?language=ko`, (response) =>
+  const movieDefaultInfoHtml = fetchMovieDetailInfo(`${BASE_URL_KEY}${MOVIE_PATH}/${movieId}?language=ko`, (response) =>
     makeMovieDefaultInfoHtml(response)
   );
 
   //등장인물
-  const movieCastInfoHtml = getMovieDetailInfo(
+  const movieCastInfoHtml = fetchMovieDetailInfo(
     `${BASE_URL_KEY}${MOVIE_PATH}/${movieId}/credits?language=ko`,
     (response) => makeMovieCastInfoHtml(response)
   );
 
   //관련 영상 정보
-  const movieVideoInfoHtml = getMovieDetailInfo(
+  const movieVideoInfoHtml = fetchMovieDetailInfo(
     `${BASE_URL_KEY}${MOVIE_PATH}/${movieId}/videos?language=en-US`,
     (response) => makeMovieVideoInfoHtml(response)
   );
@@ -43,7 +43,7 @@ const getMovieDetailHandler = async (movieId) => {
     history.back();
   });
 
-  //블로킹되는 부분을 최소화 하기위해 많은 시간이 블로킹되는 반복문과 API호출을 미리 선작업하고 만들어진 Html을 여기서 한번에 셋팅
+  //블로킹되는 부분을 최소화 하기위해 많은 시간이 블로킹되는 반복문과 API호출을 병렬로 선작업하고 만들어진 Html을 여기서 셋팅
   movieVideoInfoHtml.then((html) => (document.getElementById('video_list').innerHTML = html));
   movieCastInfoHtml.then((html) => (document.getElementById('char_list').innerHTML = html));
   movieDefaultInfoHtml.then((html) => (document.getElementById('info_list').innerHTML = html));
@@ -52,7 +52,7 @@ const getMovieDetailHandler = async (movieId) => {
 /**
  *  영화 상세 정보 조회
  * */
-const getMovieDetailInfo = (url, makeHtmlCallBack) => {
+const fetchMovieDetailInfo = (url, makeHtmlCallBack) => {
   return fetchUtils
     .get(url, (method) => fetchUtils.setupOptions(method, fetchUtils.APPLICATION_JSON, API_KEY))
     .then((response) => response.json())
