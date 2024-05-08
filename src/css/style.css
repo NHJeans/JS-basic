@@ -180,14 +180,14 @@ section {
 
 .swiper-slide {
   cursor: pointer;
-  margin-left: 100px;
+  /* margin-left: 100px; */
   text-align: center;
   font-size: 18px;
   background: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: fit-content !important;
+  /* width: fit-content !important; */
 }
 
 .swiper-slide.sub {

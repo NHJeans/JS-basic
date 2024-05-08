@@ -144,34 +144,98 @@ const getMoviesHandler = () => {
  * 스와이퍼 셋팅
  * */
 const setupSwiper = () => {
-  const swiperOption = {
-    slidesPerView: 5,
-    slidesPerGroup: 2,
-    loop: true,
-    speed: 600,
-    centeredSlides: false,
-    autoplay: {
-      delay: 2000,
-      disableOnInteraction: false,
-    },
-    spaceBetween: 15,
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'fraction',
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  };
-
   const TYPE_SET = new Set([MY_SWIPER, SUB_SWIPER]);
 
   for (const type of TYPE_SET) {
+    let swiperOption;
+    if (type === MY_SWIPER) {
+      swiperOption = {
+        slidesPerView: 3,
+        slidesPerGroup: 1,
+        centeredSlides: true,
+        loop: true,
+        speed: 600,
+        centeredSlides: false,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        spaceBetween: 15,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'fraction',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          1400: {
+            slidesPerView: 3
+          },
+          1200: {
+            slidesPerView: 2
+          },
+          992: {
+            slidesPerView: 2
+          },
+          768: {
+            slidesPerView: 1
+          },
+          576: {
+            slidesPerView: 1
+          },
+          300: {
+            slidesPerView: 1
+          },
+        },
+      };
+    } else if (type === SUB_SWIPER) {
+
+      swiperOption = {
+        slidesPerView: 5,
+        slidesPerGroup: 5,
+        loop: true,
+        speed: 600,
+        centeredSlides: false,
+        autoplay: {
+          delay: 2000,
+          disableOnInteraction: false,
+        },
+        breakpoints: {
+          1400: {
+            slidesPerView: 5
+          },
+          1200: {
+            slidesPerView: 4
+          },
+          992: {
+            slidesPerView: 3
+          },
+          768: {
+            slidesPerView: 2
+          },
+          576: {
+            slidesPerView: 1
+          },
+          300: {
+            slidesPerView: 1
+          },
+        },
+        spaceBetween: 15,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'fraction',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      };
+    }
     new Swiper(`.${type}`, swiperOption);
   }
 };
-
 /**
  *  영화 정보 조회
  * */
