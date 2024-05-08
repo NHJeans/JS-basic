@@ -1,112 +1,52 @@
-const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNzA5MTZmN2I0NzQyMGFhMjYzNWJlY2E2NjFjMjVkZiIsInN1YiI6IjY2MjYwOTAyNjNkOTM3MDE4Nzc0MGZiZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Lj5NbVCVHmBGRLI-iHDmhau9pA4XE04pa-SrqG3_Zlc';
-const BASE_URL = 'https://api.themoviedb.org/3'
-const IMAGE_URL = 'https://image.tmdb.org/t/p/w500/'
+let fetchUtils = new FetchUtils();
+let allMovieList = [];
 
-
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: `Bearer ${API_KEY}`
-  },
-};
-
-
-let moviesData = [];
-
-const getMovies = async () => {
+document.addEventListener('DOMContentLoaded', async function () {
+  await getMoviesHandler();
   try {
-    const response = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', options);
-    const data = await response.json();
-    // console.log(data.results)
-    moviesData = data.results;
-    renderMovies(moviesData);
-  } catch (error) {
-    console.error(error);
+    makeLikeMoviesHtml();
+  } catch (e) {
+    console.log('좋아요 목록이 없습니다.');
   }
-}
+});
 
-const createMovieCard = moviesData => {
-  const { id, poster_path, title, overview, vote_average } = moviesData;
+/**
+ * 좋아요 영화 목록 HTML 생성
+ * */
+const makeLikeMoviesHtml = () => {
+  const items = localStorage.getItem('like');
 
-  //? 영화 카드의 컨테이너를 생성
-  const movieCard = document.createElement('div');
-  movieCard.classList.add('movie-card');
-  movieCard.id = id;
-
-  //? 영화 포스터 이미지
-  const img = document.createElement('img');
-  img.src = `${IMAGE_URL}${poster_path}`;
-  img.alt = `${title} poster`;
-  img.classList.add('movie-poster');
-
-  const contentContainer = document.createElement('div');
-  contentContainer.classList.add('content-container');
-
-
-  //? 영화 제목
-  const movieTitle = document.createElement('h3');
-  movieTitle.textContent = title;
-  movieTitle.classList.add('movie-title');
-
-  //? 영화 설명
-  const movieOverview = document.createElement('p');
-  movieOverview.textContent = overview;
-  movieOverview.classList.add('movie-overview');
-
-  //? 평점
-  const movieRating = document.createElement('span');
-  movieRating.textContent = `Rating: ${vote_average}`;
-  movieRating.classList.add('movie-rating');
-
-
-  movieCard.appendChild(img);
-  movieCard.appendChild(contentContainer);
-
-  contentContainer.appendChild(movieTitle);
-  contentContainer.appendChild(movieOverview);
-  contentContainer.appendChild(movieRating);
-
-  movieCard.addEventListener('click', showMovieId);
-
-  return movieCard;
-}
-
-const renderMovies = moviesData => {
-  const moviesContainer = document.querySelector('.card-list');
-  moviesContainer.innerHTML = '';
-
-  moviesData.forEach(movie => {
-    const movieCard = createMovieCard(movie);
-    moviesContainer.appendChild(movieCard);
+  const likeMovieList = allMovieList.filter((movie) => {
+    return items.includes(movie.id.toString());
   });
-}
 
-const showMovieId = (e) => {
-  window.alert(`영화 ID: ${e.currentTarget.id}`);
+  const request = {
+    results: likeMovieList,
+  };
+
+  const movieContainerElement = document.querySelector('.movie-container');
+  const child = movieContainerElement.children[1];
+  movieContainerElement.insertBefore(makeMoviesHtml(request, SUB_SWIPER, '좋아요목록'), child);
+  setupSwiper();
 };
 
+/**
+ * 상세 페이지로 이동
+ * */
+const moveSub = (e) => {
+  location.href = `./html/sub.html?movieId=${e.currentTarget.id}`;
+};
 
-const searchMovies = (movies) => {
-  const searchText = document.getElementById('search-input').value.toLowerCase();
-  // console.log(document.getElementById('search-input').value);
-  if (searchText === '') {
-    alert("검색어를 입력해주세요.");
-    return
-  }
-  const filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(searchText));
-  renderMovies(filteredMovies);
-}
-
-document.getElementById('search-form').addEventListener('submit', function (e) {
-  e.preventDefault();
-  searchMovies(moviesData);
+/**
+ * 메인으로 돌아가는 버튼
+ * */
+document.querySelector('header h1').addEventListener('click', () => {
+  window.location.reload();
 });
-// 메인으로 돌아가는 버튼
-document.querySelector('header h1').addEventListener(
-  'click', () => {
-    window.location.reload();
-  });
+
+/**
+ * 최상단으로 가는 버튼
+ * */
 document.querySelector('.up-btn').addEventListener('click', () => {
   window.scrollTo({
     top: 0,
@@ -114,7 +54,268 @@ document.querySelector('.up-btn').addEventListener('click', () => {
   });
 });
 
-getMovies();
+/**
+ * 검색
+ * */
+document.getElementById('search-form').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  await searchMoviesHandler();
+});
+/**
+ * 검색 키워드 영화 목록 조회
+ * */
+const searchMoviesHandler = async () => {
+  const keyword = document.getElementById('search-input').value;
+  // console.log(document.getElementById('search-input').value);
+  if (keyword === '') {
+    alert('검색어를 입력해주세요.');
+    return;
+  }
 
+  const url = `${BASE_URL_KEY}/3/search/movie?query=%${keyword}&include_adult=false&language=ko&page=1`;
+  await fetchMoviesInfo(url, (response) => makeSearchMovieHtml(response));
+  document.getElementById('movie-container').style.display = 'none';
+};
 
+/**
+ * 검색한 영화 목록 HTML 생성
+ * */
+const makeSearchMovieHtml = (response) => {
+  const moviesContainer = document.querySelector('.card-list');
+  moviesContainer.innerHTML = '';
+
+  response.results.forEach((movie) => {
+    const { id, poster_path: posterPath, title, overview, vote_average: voteAverage } = movie;
+
+    //? 영화 카드의 컨테이너를 생성
+    const movieCard = document.createElement('div');
+    movieCard.classList.add('movie-card');
+    movieCard.id = id;
+
+    //? 영화 포스터 이미지
+    const img = document.createElement('img');
+    img.src = `${IMAGE_BASE_URL}${IMAGE_PATH}${posterPath}`;
+    img.alt = `${title} poster`;
+    img.classList.add('movie-poster');
+
+    const contentContainer = document.createElement('div');
+    contentContainer.classList.add('content-container');
+
+    //? 영화 제목
+    const movieTitle = document.createElement('h3');
+    movieTitle.textContent = title;
+    movieTitle.classList.add('movie-title');
+
+    //? 영화 설명
+    const movieOverview = document.createElement('p');
+    movieOverview.textContent = overview;
+    movieOverview.classList.add('movie-overview');
+
+    //? 평점
+    const movieRating = document.createElement('span');
+    movieRating.textContent = `평점: ${voteAverage}`;
+    movieRating.classList.add('movie-rating');
+
+    movieCard.appendChild(img);
+    movieCard.appendChild(contentContainer);
+
+    contentContainer.appendChild(movieTitle);
+    contentContainer.appendChild(movieRating);
+
+    movieCard.addEventListener('click', moveSub);
+
+    moviesContainer.appendChild(movieCard);
+  });
+};
+
+/**
+ * 검색창 초기화 버튼
+ * */
+document.querySelector('#reset-btn').addEventListener('click', () => {
+  const inputValue = document.querySelector('#search-input');
+
+  inputValue.value = '';
+  document.getElementById('movie-container').style.display = 'block';
+  document.querySelector('.card-list').innerHTML = '';
+});
+
+/**
+ * 영화 목록 조회 핸들러
+ * */
+const getMoviesHandler = async () => {
+  let promiseList = [];
+
+  REQUEST_ARGUMENT_MAP_LIST.forEach((requestMap) => {
+    promiseList.push(
+      fetchMoviesInfo(requestMap.get('url'), (response) => {
+        allMovieList.push(...response.results);
+        return makeMoviesHtml(response, requestMap.get('type'), requestMap.get('category'));
+      })
+    );
+  });
+
+  // 병렬 처리 후 성공한 것만 html 셋팅
+  await Promise.all(promiseList).then((htmlList) => {
+    const movieContainerElement = document.querySelector('.movie-container');
+    htmlList.filter((value) => value !== undefined).forEach((html) => movieContainerElement.appendChild(html));
+  });
+
+  setupSwiper();
+};
+
+/**
+ * 스와이퍼 셋팅
+ * */
+const setupSwiper = () => {
+  const TYPE_SET = new Set([MY_SWIPER, SUB_SWIPER]);
+
+  for (const type of TYPE_SET) {
+    let swiperOption;
+    if (type === MY_SWIPER) {
+      swiperOption = {
+        slidesPerView: 3,
+        slidesPerGroup: 1,
+        centeredSlides: true,
+        loop: true,
+        speed: 600,
+        centeredSlides: false,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        spaceBetween: 15,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'fraction',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          1400: {
+            slidesPerView: 3
+          },
+          1200: {
+            slidesPerView: 2
+          },
+          992: {
+            slidesPerView: 2
+          },
+          768: {
+            slidesPerView: 1
+          },
+          576: {
+            slidesPerView: 1
+          },
+          300: {
+            slidesPerView: 1
+          },
+        },
+      };
+    } else if (type === SUB_SWIPER) {
+
+      swiperOption = {
+        slidesPerView: 5,
+        slidesPerGroup: 5,
+        loop: true,
+        speed: 600,
+        centeredSlides: false,
+        autoplay: {
+          delay: 2000,
+          disableOnInteraction: false,
+        },
+        breakpoints: {
+          1400: {
+            slidesPerView: 5
+          },
+          1200: {
+            slidesPerView: 4
+          },
+          992: {
+            slidesPerView: 3
+          },
+          768: {
+            slidesPerView: 2
+          },
+          576: {
+            slidesPerView: 1
+          },
+          300: {
+            slidesPerView: 1
+          },
+        },
+        spaceBetween: 15,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'fraction',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      };
+    }
+    new Swiper(`.${type}`, swiperOption);
+  }
+};
+/**
+ *  영화 정보 조회
+ * */
+const fetchMoviesInfo = async (url, makeHtmlCallBack) => {
+  return fetchUtils
+    .get(url, (method) => fetchUtils.setupOptions(method, fetchUtils.APPLICATION_JSON, API_KEY))
+    .then((response) => response.json())
+    .then((responseOfJson) => makeHtmlCallBack(responseOfJson))
+    .catch((e) => console.log(e));
+};
+
+/**
+ * 영화 HTML Make
+ * */
+const makeMoviesHtml = (response, type, category) => {
+  const wrapperDiv = document.createElement('div');
+  wrapperDiv.innerHTML = `
+        <div #swiperRef="" class="swiper ${type}">
+                  <h1 class="movie-category">
+            ${category}
+          </h1>
+        <div class="swiper-wrapper">
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+      <div class="divider"></div>
+  `;
+
+  const imageClassName = type === SUB_SWIPER ? 'sub' : '';
+  const hidden = type === SUB_SWIPER ? 'hidden' : '';
+  const maxSize = type === MY_SWIPER ? 10 : response.results.length;
+
+  for (let i = 0; i < maxSize; i++) {
+    const { id, poster_path: posterPath } = response.results[i];
+    let html = ` 
+         <div class="swiper-slide ${imageClassName}" id="${id}" >
+         <div class="overlay"></div>
+              <h1 class="movie-top-10" style="font-size: 100px; margin-left: 0px; color: white" ${hidden}>${i + 1} </h1>
+            <img class="${imageClassName}" src="${IMAGE_BASE_URL}${IMAGE_PATH}${posterPath}"/>
+         </div>`;
+
+    let swiperWrapperElement = wrapperDiv.querySelector('.swiper-wrapper');
+    swiperWrapperElement.innerHTML += html;
+  }
+
+  const swiperSlide = wrapperDiv.querySelectorAll('.swiper-slide');
+
+  swiperSlide.forEach((item) => {
+    item.addEventListener('mouseover', function () {
+      this.querySelector('.overlay').style.opacity = 1;
+    });
+    item.addEventListener('mouseout', function () {
+      this.querySelector('.overlay').style.opacity = 0;
+    });
+    item.addEventListener('click', moveSub);
+  });
+  return wrapperDiv;
+};
 

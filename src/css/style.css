@@ -3,77 +3,97 @@
   margin: 0;
 }
 
+@font-face {
+  font-family: 'Chab';
+  src: url('../fonts/chab.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ddag';
+  src: url('../fonts/ddag.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+header img {
+  width: 90px;
+  height: 90px;
+  margin: 70px 0 0 0px;
+}
+
 body {
-  font-family: 'Roboto', sans-serif;
+  max-width: 1500px;
+  /* font-family: 'Ddag', sans-serif; */
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  height: 100%;
+
   letter-spacing: -0.02em;
+  background: black;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
+.search-container {
   width: 100%;
-  height: 100px;
-  padding: 0 30px;
-  background-color: #c2c2af;
-}
-
-header h1 {
-  font-size: 40px;
-  color: #252525;
-  cursor: pointer;
-}
-
-header div {
-  width: 50px;
-  height: 50px;
-  border: #252525 solid 2px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.search {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   padding: 20px 0;
-  background-color: #252525;
-  border-bottom: 1px solid black;
+  background-color: black;
 }
 
-.search label {
-  font-size: 25px;
-  color: white;
+.search-container .search {
+  position: relative;
+  width: 300px;
+  height: 100%;
+  margin: 10px auto 20px;
 }
 
-.search input {
-  margin-left: 20px;
-  min-width: 200px;
-  padding: 5px 10px;
+.search-container .search input {
+  min-width: 300px;
+  padding: 10px 34px 10px;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 15px;
+  color: #000;
   border: none;
-  border-radius: 10px;
+  outline: none;
 }
 
-.search button {
-  margin-left: 10px;
-  padding: 5px 10px;
+.search-container .search input::placeholder {
+  color: #5f6368;
+}
+
+.search-container .search button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
   border: none;
-  border-radius: 10px;
+  background-color: transparent;
   cursor: pointer;
+}
+
+.search-container .search #search-btn {
+  left: 7px;
+}
+
+.search-container .search #reset-btn {
+  right: 7px;
 }
 
 section {
-  background-color: #f6f5e8;
+  background-color: #000;
 }
 
 .card-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   justify-content: center;
+  border-top: 1px #1b1c1d solid;
 }
 
 .movie-card {
@@ -83,60 +103,182 @@ section {
     0 3px 6px rgba(0, 0, 0, 0.12),
     0 3px 6px rgba(0, 0, 0, 0.24);
   margin: 20px;
-  padding: 20px;
-  width: 300px;
   justify-self: center;
-  background-color: bisque;
+  background-color: #000;
   border-radius: 10px;
   cursor: pointer;
   user-select: none;
 }
 
-.content-container {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.movie-card img {
+.movie-poster {
   width: 100%;
+  height: 310px;
   border-radius: 10px;
 }
 
 .movie-title {
-  margin: 15px 0;
+  margin-top: 10px;
+  color: #fff;
 }
 
-.movie-title h3 {
-  margin-bottom: 100px;
+.movie-rating {
+  display: inline-block;
+  margin-top: 5px;
+  color: #babac1;
+}
+
+.movie-container {
+  background-color: black;
+}
+
+.movie-category {
+  margin: 10px auto 10px 10px;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0px;
+  line-height: 26px;
+}
+
+.movie-top-10 {
+  position: fixed;
+  bottom: -5px;
+  right: 394px;
+  padding-left: 50px;
 }
 
 .up-btn {
+  z-index: 1; /* 다른 요소 위에 위치하도록 설정 */
   position: fixed;
-  bottom: 20px;
+  bottom: 25px;
   right: 20px;
   border: none;
   padding: 15px 18px;
   border-radius: 50%;
   cursor: pointer;
-  background-color: #252525;
+  background-color: #f82f62;
   color: white;
 }
 
-@media screen and (max-width: 992px) {
-  .card-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.swiper-slide {
+  cursor: pointer;
+  /* margin-left: 100px; */
+  text-align: center;
+  font-size: 18px;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: fit-content !important; */
 }
 
-@media screen and (max-width: 768px) {
-  .card-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.swiper-slide.sub {
+  margin-left: 0px;
 }
 
-@media screen and (max-width: 576px) {
-  .card-list {
-    grid-template-columns: repeat(1, 1fr);
-  }
+.swiper-slide img {
+  display: block;
+  width: 398px;
+  height: 569px;
+  object-fit: inherit;
+  /*object-fit: cover;*/
+  /*border-radius: 30px;*/
+}
+
+.swiper {
+  width: 100%;
+  /*height: 300px;*/
+  margin: 20px auto;
+}
+
+.append-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.append-buttons button {
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #007aff;
+  color: #007aff;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin: 0 10px;
+  font-size: 13px;
+}
+
+.swiper-slide img.sub {
+  display: block;
+  width: 300px;
+  height: 427px;
+  object-fit: inherit;
+  /*object-fit: cover;*/
+  /*border-radius: 30px;*/
+}
+
+.divider {
+  padding: 20px 0 20px 0;
+  background-color: #000;
+}
+
+/* footer */
+.footer {
+  background-color: #262626;
+  color: #6e6d6d;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0 40px 0;
+}
+
+.footer-info-box,
+.footer-links {
+  text-align: left;
+}
+
+.footer-logo {
+  width: 70px;
+  margin: 20px;
+}
+.team-list,
+.footer-info-box p {
+  margin-left: 30px;
+}
+
+.team-list {
+  padding: 0;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: start;
+  white-space: nowrap;
+}
+
+.team-list li {
+  margin-right: 30px;
+  white-space: nowrap;
+}
+
+.footer-links img {
+  width: 100px;
+  height: 100px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
