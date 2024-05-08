@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   const movieId = queryParams.get('movieId');
 
   await getMovieDetailHandler(movieId);
+  checkMovieLikedStatus(movieId);
 });
 
 /**

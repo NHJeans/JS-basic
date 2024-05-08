@@ -1,9 +1,5 @@
 // 좋아요 버튼
 const likeBtn = document.querySelector('.like_btn');
-const movieCard = document.querySelector('.movie-card');
-const likeContainer = document.querySelector('.like-container');
-
-function createLike() {}
 
 function saveLike(savedLikes) {
   localStorage.setItem('like', JSON.stringify(savedLikes));
@@ -15,13 +11,21 @@ function likeMovie() {
   const savedLikes = JSON.parse(localStorage.getItem('like')) || []; // like(키) 없을 때
 
   if (savedLikes.includes(urlId)) {
+    localStorage.setItem('like', JSON.stringify(savedLikes.filter((likeMovieId) => likeMovieId !== urlId)));
     return;
   } else {
     savedLikes.push(urlId);
     saveLike(savedLikes);
   }
+}
 
-  savedLikes.forEach(createLike);
+function checkMovieLikedStatus(movieId) {
+  let likeMovies = localStorage.getItem('like');
+
+  if (likeMovies !== null && likeMovies.includes(movieId.toString())) {
+    const likeBtn = document.querySelector('.like_btn');
+    likeBtn.classList.toggle('on');
+  }
 }
 
 likeBtn.addEventListener('click', likeMovie);

@@ -1,8 +1,34 @@
 let fetchUtils = new FetchUtils();
+let allMovieList = [];
 
-document.addEventListener('DOMContentLoaded', function () {
-  getMoviesHandler();
+document.addEventListener('DOMContentLoaded', async function () {
+  await getMoviesHandler();
+  try {
+    makeLikeMoviesHtml();
+  } catch (e) {
+    console.log('좋아요 목록이 없습니다.');
+  }
 });
+
+/**
+ * 좋아요 영화 목록 HTML 생성
+ * */
+const makeLikeMoviesHtml = () => {
+  const items = localStorage.getItem('like');
+
+  const likeMovieList = allMovieList.filter((movie) => {
+    return items.includes(movie.id.toString());
+  });
+
+  const request = {
+    results: likeMovieList,
+  };
+
+  const movieContainerElement = document.querySelector('.movie-container');
+  const child = movieContainerElement.children[1];
+  movieContainerElement.insertBefore(makeMoviesHtml(request, SUB_SWIPER, '좋아요목록'), child);
+  setupSwiper();
+};
 
 /**
  * 상세 페이지로 이동
@@ -114,29 +140,27 @@ document.querySelector('#reset-btn').addEventListener('click', () => {
 });
 
 /**
- * 영화들 조회 핸들러
+ * 영화 목록 조회 핸들러
  * */
-const getMoviesHandler = () => {
+const getMoviesHandler = async () => {
   let promiseList = [];
 
   REQUEST_ARGUMENT_MAP_LIST.forEach((requestMap) => {
     promiseList.push(
-      fetchMoviesInfo(requestMap.get('url'), (response) =>
-        makeMoviesHtml(response, requestMap.get('type'), requestMap.get('category'))
-      )
+      fetchMoviesInfo(requestMap.get('url'), (response) => {
+        allMovieList.push(...response.results);
+        return makeMoviesHtml(response, requestMap.get('type'), requestMap.get('category'));
+      })
     );
   });
 
   // 병렬 처리 후 성공한 것만 html 셋팅
-  Promise.all(promiseList).then((htmlList) => {
+  await Promise.all(promiseList).then((htmlList) => {
     const movieContainerElement = document.querySelector('.movie-container');
-    htmlList
-      .filter((value) => value !== undefined)
-      .forEach((html) => {
-        movieContainerElement.appendChild(html);
-        setupSwiper();
-      });
+    htmlList.filter((value) => value !== undefined).forEach((html) => movieContainerElement.appendChild(html));
   });
+
+  setupSwiper();
 };
 
 /**
@@ -181,7 +205,6 @@ const fetchMoviesInfo = async (url, makeHtmlCallBack) => {
  * */
 const makeMoviesHtml = (response, type, category) => {
   const wrapperDiv = document.createElement('div');
-
   wrapperDiv.innerHTML = `
         <div #swiperRef="" class="swiper ${type}">
                   <h1 class="movie-category">
