@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async function () {
  * 좋아요 영화 목록 HTML 생성
  * */
 const makeLikeMoviesHtml = () => {
-  const items = localStorage.getItem('like');
+  const items = JSON.parse(localStorage.getItem('like'));
 
   const likeMovieList = allMovieList.filter((movie) => {
     return items.includes(movie.id.toString());
